@@ -24,7 +24,7 @@ public class absyz_LWCSessionController {
 
     @AuraEnabled(cacheable=true)
     public static List<Contact> getContacts(){
-        return [SELECT Id,Name from Contact LIMIT 10];
+        return [SELECT Id,Name, Email FROM Contact LIMIT 10];
     }
 
     @AuraEnabled(cacheable=true)
