@@ -1,0 +1,14 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Create Contact" icon-name="custom:custom63">
+        <div class="slds-p-around-small">
+            <lightning-record-form
+                object-api-name={objectApiName}
+                fields={fields}
+                onsubmit={handleSubmit}
+                onsuccess={handleSuccess}
+                onerror = {handleError}
+            >
+            </lightning-record-form>
+        </div>
+    </lightning-card>
+</template>

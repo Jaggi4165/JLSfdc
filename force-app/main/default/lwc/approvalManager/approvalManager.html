@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Submit Approval Request">
+        <div class="slds-p-around_medium">
+            <lightning-combobox label="Object" value={selectedObject}
+                options={objectOptions} onchange={handleObjectChange}></lightning-combobox>
+
+            <template if:true={recordOptions}>
+                <lightning-combobox label="Record" value={selectedRecord}
+                    options={recordOptions} onchange={handleRecordChange}></lightning-combobox>
+            </template>
+
+            <lightning-button label="Submit for Approval" variant="brand"
+                onclick={submitApproval} class="slds-m-top_medium"></lightning-button>
+        </div>
+    </lightning-card>
+
+    <lightning-card title="My Pending Approval Requests" class="slds-m-top_medium">
+        <template if:true={approvalList}>
+            <lightning-datatable key-field="workitemId" data={approvalList}
+                columns={columns} onrowaction={handleRowAction}
+                hide-checkbox-column></lightning-datatable>
+        </template>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

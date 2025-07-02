@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Accounts with Contacts" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                    {error.body.message}
+                </div>
+            </template>
+            <template if:true={accountsWithContacts}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={accountsWithContacts}
+                    columns={columns}
+                    onrowaction={handleToggle}
+                    hide-checkbox-column
+                >
+                </lightning-datatable>
+                
+                <template for:each={accountsWithContacts} for:item="account">
+                    <div key={account.Id} class="slds-m-left_xx-large" if:true={account.isExpanded}>
+                        <h3 class="slds-text-heading_small slds-m-top_small">Contacts for {account.Name}</h3>
+                        <lightning-datatable
+                            key-field="Id"
+                            data={account.contacts}
+                            columns={contactColumns}
+                            hide-checkbox-column
+                        >
+                        </lightning-datatable>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

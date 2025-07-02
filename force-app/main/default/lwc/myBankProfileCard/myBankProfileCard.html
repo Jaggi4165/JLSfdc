@@ -1,0 +1,10 @@
+<template>       
+    <!--search for loans || EMI-->
+    <lightning-card size="12">
+        <h1>{myBankName}</h1>
+
+       <lightning-input label="Search By EMI or Loan Number" name="searchDetails" size="2"></lightning-input>
+       <lightning-button label="Search" varient="brand" onclick={myaccountjs} size="1"></lightning-button>
+       <h2>My Details Are : </h2> {myaccount}
+    </lightning-card>
+</template>

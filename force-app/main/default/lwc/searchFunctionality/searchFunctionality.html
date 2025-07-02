@@ -1,0 +1,55 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Progress bar" icon-name="custom:custom65">
+        
+        <div class="slds-align_absolute-center">
+            <lightning-dynamic-icon
+                type="eq"
+                option="play"
+                alternative-text="Recording in progress">
+            </lightning-dynamic-icon>
+        </div>
+        <div class="slds-p-around_medium slds-align_absolute-center">
+            <lightning-progress-ring value={progress} size="large"> </lightning-progress-ring>
+        </div>
+       
+    </lightning-card>
+    <lightning-card  variant="Narrow"  title="Search Accounts by Name" icon-name="custom:custom1">  
+        <div class="slds-p-around_small">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="8" padding="around-small">
+                    <lightning-input type="search" data-id="searchKeyword" name="name" variant="label-hidden" value={searchkey} label="Enter your account name" onchange={onchangehandler} placeholder="Search By Name..."></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="1" padding="around-small">
+                    
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-button variant="brand" label="Search" title="titleName" onclick={handleClick}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout lwc:if={haveAccounts}>
+                <lightning-layout-item size="8">
+                    <lightning-input type="checkbox" checked={filterByPhone} variant="standard" name="name" label="Filter By Phone" onchange={onchangeChkhandler}></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        
+        <div lwc:if={message} class="slds-box slds-theme_error slds-theme_error-texture">
+            <p>{message}</p>
+        </div>
+        
+        <div class="slds-p-around_small slds-align_absolute-center">
+            <!-- Results -->
+            <!-- <lightning-spinner lwc:if={showSpinner} alternative-text="Loading" size="xx-small"></lightning-spinner> -->
+            <template lwc:if={haveAccounts}>
+                <lightning-datatable
+                    key-field="id"
+                    data={accounts}
+                    show-row-number-column
+                    columns={columns}>
+                </lightning-datatable>
+                
+            </template>
+            
+        </div>
+    </lightning-card>
+</template>

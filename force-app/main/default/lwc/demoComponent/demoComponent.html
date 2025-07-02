@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Component name : DemoComponent">
+    <lightning-card title="Display Greetings">
+        Hello! {name}
+<!--        <c-account-creator></c-account-creator> -->
+    </lightning-card>   
+    <lightning-card title="UPPER CASE">
+            <div>
+                <lightning-input name='firstName' label="First Name" onchange={handleChange}></lightning-input>
+                <lightning-input name='lastName' label="Last Name" onchange={handleChange}></lightning-input>
+                <p>Uppercased Full Name : {uppercasedFullName}</p>
+            </div>
+    </lightning-card>
+    <!-- formatDate.html -->
+    <lightning-card title="Time ">
+     Today Date is : <b>{formattedDate}</b><br>
+    </lightning-card>
+</lightning-card>
+</template>

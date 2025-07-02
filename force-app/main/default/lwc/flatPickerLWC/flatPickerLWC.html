@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Import third party libraries in LWC/ Flat Date Picker" icon-name="standard:event">
+    <lightning-button label="Leaves" onclick={openDatePicker}></lightning-button>
+        <div class="slds-p-horizontal_small" onclick={openDatePicker}>
+            <lightning-input type="text" label="Leaves from" class="flatpickr"></lightning-input>
+        </div>
+        <div class="slds-p-horizontal_small">
+            {start}
+        </div>
+    </lightning-card>
+</template>

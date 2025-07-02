@@ -1,0 +1,11 @@
+<apex:page controller="AccountController" lightningStylesheets="true">
+    <apex:pageBlock >
+        <apex:repeat value="{!displayContacts}" var="acc">            
+            <h4>Account Name:</h4><apex:outputText value="{!acc.Name}"/>
+            <h3>Related Contacts:</h3>
+            <apex:repeat value="{!acc.Contacts}" var="cont" >
+                   <apex:outputText value="{!cont.Name}"/>
+            </apex:repeat>    
+        </apex:repeat>
+    </apex:pageBlock>
+</apex:page>

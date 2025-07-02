@@ -1,0 +1,75 @@
+<aura:component>
+        <lightning:layout multipleRows="true">
+            
+            <lightning:layoutItem padding="around-small" size="12">
+                <div class="page-section page-header">
+                    <h1><b>FruitsNames</b></h1>
+                </div>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="around-small" size="12">
+                <lightning:layout>
+                    <lightning:layoutItem padding="around-small" size="3">
+                        <div class="page-section page-right">
+                            <h2>APPLE</h2>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="3">
+                        <div class="page-section page-main">
+                            <h2>WATERMELON</h2>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="3">
+                        <div class="page-section page-right">
+                            <h1>PINEAPPLE</h1>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                
+                <lightning:layout>
+                    <lightning:layoutItem padding="around-small" size="3">
+                        <div class="page-section page-right">
+                            <h2>Guava</h2>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="3">
+                        <div class="page-section page-main">
+                            <h2>Sweet Lime</h2>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="3">
+                        <div class="page-section page-right">
+                            <h1>Papaya</h1>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                
+                
+                <lightning:layout>
+                    <lightning:layoutItem padding="around-small" size="3">
+                        <div class="page-section page-right">
+                            <h2>Grapes</h2>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="3">
+                        <div class="page-section page-main">
+                            <h2>Orange</h2>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="3">
+                        <div class="page-section page-right">
+                            <h1>Lemon</h1>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                
+                
+                
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" padding="around-small" size="12">
+                <div class="page-footer page-section">
+                    <h1><b>Enough Fruits For Today</b></h1>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+</aura:component>

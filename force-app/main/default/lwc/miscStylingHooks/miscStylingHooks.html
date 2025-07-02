@@ -1,0 +1,97 @@
+<template>
+    <lightning-card title="Customize your Settings" icon-name="custom:custom3">
+            <lightning-button-icon icon-name="utility:refresh"   slot="actions" onclick={refreshData}  alternative-text="Save"   size="large"  variant="bare" class="slds-m-left_large" title="Save"></lightning-button-icon>
+            <lightning-button-icon icon-name="utility:settings"   slot="actions"   alternative-text="Save"   size="large"  variant="bare" class="slds-m-left_large" title="Save"></lightning-button-icon>
+            
+            <div class="slds-p-horizontal_small">
+                <lightning-layout>
+                    <lightning-layout-item padding="around-small" size="4">
+                        <div class="custom-box slds-box slds-p-around_medium">
+                            <div class="slds-var-m-around_medium">
+                                    Email Services : <lightning-input
+                                    type="toggle"
+                                    checked={emailService}
+                                    label="Email_Services__c"
+                                    variant="label-hidden"
+                                    onchange={onClickToggle}
+                                    ></lightning-input>
+
+                                    Trigger Services : <lightning-input
+                                    type="toggle"
+                                    checked={triggerService}
+                                    label="Trigger_Services__c"
+                                    variant="label-hidden"
+                                    onchange={onClickToggle}
+                                    ></lightning-input>
+                                    
+                                    Org Expiry Duedate : <lightning-input type="date" value={orgExpiryDate} onchange={onChangeDate} label="Org_Expiry_Date__c" variant="label-hidden" ></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item padding="around-small" size="4">
+                        <div class="custom-box slds-box slds-p-around_medium">
+                            <div class="slds-var-m-around_medium">
+                                    Email Services : <lightning-input
+                                    type="toggle"
+                                    checked={emailService}
+                                    label="Email_Services__c"
+                                    variant="label-hidden"
+                                    onchange={onClickToggle}
+                                    ></lightning-input>
+
+                                    Trigger Services : <lightning-input
+                                    type="toggle"
+                                    checked={triggerService}
+                                    label="Trigger_Services__c"
+                                    variant="label-hidden"
+                                    onchange={onClickToggle}
+                                    ></lightning-input>
+                                    
+                                    Org Expiry Duedate : <lightning-input type="date" value={orgExpiryDate} onchange={onChangeDate} label="Org_Expiry_Date__c" variant="label-hidden" ></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item padding="around-small" size="4">
+                        <div class="custom-box slds-box slds-p-around_medium">
+                            <div class="slds-var-m-around_medium">
+                                    Email Services : <lightning-input
+                                    type="toggle"
+                                    checked={emailService}
+                                    label="Email_Services__c"
+                                    variant="label-hidden"
+                                    onchange={onClickToggle}
+                                    ></lightning-input>
+
+                                    Trigger Services : <lightning-input
+                                    type="toggle"
+                                    checked={triggerService}
+                                    label="Trigger_Services__c"
+                                    variant="label-hidden"
+                                    onchange={onClickToggle}
+                                    ></lightning-input>
+                                    
+                                    Org Expiry Duedate : <lightning-input type="date" value={orgExpiryDate} onchange={onChangeDate} label="Org_Expiry_Date__c" variant="label-hidden" ></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+            <div slot="footer">
+                <div class="slds-p-around_medium slds-align_right">
+                            <!--<lightning-button-icon icon-name="utility:settings"  alternative-text="Settings" variant="bare" title="Settings"></lightning-button-icon>
+                            <lightning-button-icon icon-name="utility:adduser"   alternative-text="Add user" variant="border-inverse" class="slds-m-left_xx-small" title="Add user"></lightning-button-icon>-->
+                            <lightning-button-icon icon-name="utility:delete"    alternative-text="Delete"   variant="border-inverse" class="slds-m-left_xx-small" title="Delete"></lightning-button-icon>
+                            <lightning-button-icon icon-name="utility:save"      alternative-text="Save"     variant="bare" class="slds-m-left_xx-small" title="Save"></lightning-button-icon>
+                            <!--<lightning-button-icon icon-name="utility:bookmark"  alternative-text="Bookmark" variant="border-inverse" class="slds-m-left_xx-small" title="Bookmark"></lightning-button-icon>
+                            <lightning-button-icon icon-name="utility:zoomin"    alternative-text="Zoom in"  variant="border-inverse" class="slds-m-left_xx-small" title="Zoom in"></lightning-button-icon>
+                            <lightning-button-icon icon-name="utility:zoomout"   alternative-text="Zoom out" variant="border-inverse" class="slds-m-left_xx-small" title="Zoom out"></lightning-button-icon>-->
+                </div>
+            </div>
+    <!--<c-view-source source="lwc/miscStylingHooks" slot="footer">
+        Use Styling Hooks to customize the appearance of Lightning base
+        components and custom components.
+    </c-view-source>-->
+</lightning-card>
+</template>

@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Overview Of Bikes">
+       <!--<template if:true={totBikes}>
+            
+            <lightning-progress-ring value="100" > </lightning-progress-ring>
+            no.of  Bikes = {totBikes}
+        </template>
+        <template if:false={totBikes}>
+            <lightning-progress-ring value="100" > </lightning-progress-ring>
+            no.of  Bikes = 0
+        </template><br/>-->
+        <!--*********************************************************************************************-->
+        <template if:true={bikes}>
+           <lightning-progress-ring value=100 variant="expired"> </lightning-progress-ring>
+           Inactive Bikes = {bikes}
+        </template>
+        <template if:false={bikes}>
+            <lightning-progress-ring value="100" variant="expired" > </lightning-progress-ring>
+            Inactive Bikes = 0
+        </template><br/>
+        <!--*********************************************************************************************-->
+        <template if:true={bookingbikes}>
+            <lightning-progress-ring value=100> </lightning-progress-ring>
+            Current Bookings = {bookingbikes}
+        </template>
+        <template if:false={bookingbikes}>
+            <lightning-progress-ring value=100 > </lightning-progress-ring>
+            Current Bookings = 0
+        </template><br/>
+        <!--*********************************************************************************************-->
+
+        <template if:true={bikeServe}>
+            <lightning-progress-ring value=100 variant="warning"> </lightning-progress-ring>
+            Maintenance Pending = {bikeServe}
+        </template>
+        <template if:false={bikeServe}>
+            <lightning-progress-ring value=100 variant="warning"> </lightning-progress-ring>
+            Maintenance Pending = 0
+        </template>
+    </lightning-card>
+</template>

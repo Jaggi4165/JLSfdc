@@ -1,0 +1,4 @@
+({
+                getAccontRecord : function( component ) {
+                }
+})

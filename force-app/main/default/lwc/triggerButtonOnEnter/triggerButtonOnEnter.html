@@ -1,0 +1,32 @@
+<template>
+  <lightning-card title="Trigger Button on Enter">
+    <div class="slds-box">
+      <lightning-layout multiple-rows>
+        <lightning-layout-item size="12" padding="around-small">
+          <lightning-input
+            data-id="txt"
+            label="Your text here"
+            type="text"
+            onchange={handleChange}
+            value={txtValue}
+            class="slds-p-top_medium"
+          ></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" padding="around-small">
+          <lightning-button
+            label="Click me or hit Enter"
+            title="Click me"
+            onclick={handleButton}
+          ></lightning-button>
+        </lightning-layout-item>
+        <template if:true={showValue}>
+          <lightning-layout-item size="12" padding="around-small">
+            <p style="font-size: xx-large; color: tan">
+              <b>{txtValue}</b>
+            </p>
+          </lightning-layout-item>
+        </template>
+      </lightning-layout>
+    </div>
+  </lightning-card>
+</template>

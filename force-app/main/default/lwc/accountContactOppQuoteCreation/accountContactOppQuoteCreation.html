@@ -1,0 +1,667 @@
+<template>
+    <lightning-card>
+        <!-- Progress Indicator -->
+        <!-- final ContactId : {finalContactId} <br>
+        final AccountId : {finalAccountId}-->
+        <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+            <lightning-progress-step label={progressBarLabel.Step1Name} value="1" onclick={handleOnStepClick}>
+            </lightning-progress-step>
+            <lightning-progress-step label={progressBarLabel.Step2Name} value="2" onclick={handleOnStepClick}>
+            </lightning-progress-step>
+            <lightning-progress-step label={progressBarLabel.Step3Name} value="3" onclick={handleOnStepClick}>
+            </lightning-progress-step>
+            <template if:true={isStepFour}>
+                <lightning-progress-step label={progressBarLabel.Step4Name} value="4" onclick={handleOnStepClick}>
+                </lightning-progress-step>
+            </template>
+        </lightning-progress-indicator>
+        <div class="slds-p-around_medium"></div>
+
+
+        <!--(############################################Step-1####################################################)-->
+
+        <template if:true={isStepOne}>
+            <template if:false={conid1}>
+                <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.contactInfoDivider}</h3>
+
+                <!--New,Existing Contact Radio Buttons Selection Here...-->
+                <div class="slds-col slds-size_2-of-12">
+                    <lightning-radio-group name="radioGroupForContact" label="" options={optionsForContact}
+                        value={valueRadioContact} type="radio" onchange={handleRadioChange}>
+                    </lightning-radio-group>
+                </div>
+
+                <div class="slds-col slds-size_10-of-12">
+                    <!--****************************************************Existing Contact page*******************************************-->
+                    <template if:true={existingContactPage}>
+                        <div class="slds-p-around_medium">
+
+                            <!--contact lookup-->
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="combobox-id-1"
+                                    id="combobox-label-id-33">{sectionTitleDividerLabels.contactNameLable}</label>
+                                <div class="slds-form-element__control">
+                                    <div class="slds-combobox_container">
+                                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                role="none">
+                                                <input type="search" class="slds-input slds-combobox__input"
+                                                    placeholder="Search..." value={ContactSearchKey}
+                                                    onkeychange={handlecontactname} onkeypress={handleGetContactSearch}
+                                                    onkeyup={handleGetContactSearch}
+                                                    onkeydown={handleGetContactSearch} />
+                                                <span
+                                                    class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                    <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"
+                                                        aria-hidden="true">
+                                                        <use
+                                                            xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search">
+                                                        </use>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                <template for:each={contactRecords} for:item="con">
+                                    <li role="presentation" class="slds-listbox__item" key={con.Id} data-id={con.Id}
+                                        data-value={con.Name} onclick={getTheData}>
+                                        <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                            role="option">
+                                            <span class="slds-media__figure slds-listbox__option-icon">
+                                                <span class="slds-icon_container slds-icon-standard-contact">
+                                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                        <use
+                                                            xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contact">
+                                                        </use>
+                                                    </svg>
+                                                </span>
+                                            </span>
+                                            <span class="slds-media__body">
+                                                <span
+                                                    class="slds-listbox__option-text slds-listbox__option-text_entity">{con.Name}</span>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+
+                        </div>
+                    </template>
+                    <!-- ************************************************ New Contact Page ***********************************************-->
+                    <template if:true={newContactPage}>
+                        <div class="slds-p-around_medium">
+                            <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.generalConInfoDivider}</h3>
+                            <div>
+                                <lightning-layout>
+                                    <lightning-layout-item size="5">
+                                        <lightning-input label={newConPageLabels.conFirstNameLabel}
+                                            onchange={handleContactFirstName} value={myContactRecord.FirstName}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="2"></lightning-layout-item>
+                                    <lightning-layout-item size="5">
+                                        <lightning-input label={newConPageLabels.conLastNameLabel}
+                                            onchange={handleContactName} value={myContactRecord.LastName} required=true>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item size="5">
+                                        <lightning-input label={newConPageLabels.conPhoneLabel}
+                                            onchange={handleContactPhone} value={myContactRecord.Phone}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="2"></lightning-layout-item>
+                                    <lightning-layout-item size="5">
+                                        <lightning-input label={newConPageLabels.conEmailLabel}
+                                            onchange={handleContactEmail} value={myContactRecord.Email}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <div class="slds-p-around_medium"></div>
+                                <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.conAddressInfoDivider}
+                                </h3>
+                                <lightning-layout>
+                                    <lightning-layout-item size="12">
+                                        {newConPageLabels.conMailingAddressLabel}
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item size="12">
+                                        <lightning-input label={newConPageLabels.conMailingStreetLabel}
+                                            onchange={handleContactMailingStreet} value={myContactRecord.MailingStreet}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item size="7">
+                                        <lightning-input label={newConPageLabels.conMailingcityLabel}
+                                            onchange={handleContactMailingCity} value={myContactRecord.MailingCity}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="1"></lightning-layout-item>
+                                    <lightning-layout-item size="4">
+                                        <lightning-input label={newConPageLabels.conMailingStateLabel}
+                                            onchange={handleContactMailingState} value={myContactRecord.MailingState}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item size="7">
+                                        <lightning-input label={newConPageLabels.conMailingCodeLabel}
+                                            onchange={handleContactMailingcode}
+                                            value={myContactRecord.MailingPostalCode}></lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="1"> </lightning-layout-item>
+                                    <lightning-layout-item size="4">
+                                        <lightning-input label={newConPageLabels.conMailingCountryLabel}
+                                            onchange={handleContactMailingCountry}
+                                            value={myContactRecord.MailingCountry}></lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                            <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.accountInfoDivider}</h3>
+
+                            <!--New,Existing Contact Radio Buttons Selection Here...-->
+                            <div class="slds-col slds-size_2-of-12">
+                                <lightning-radio-group name="radioGroupForAccount" label="" options={optionsForAccount}
+                                    value={valueRadioAccount} type="radio" onchange={handleRadioChange2}>
+                                </lightning-radio-group>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:true={existingAccountPage}>
+                        <div class="slds-p-around_medium">
+                            <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.exAccSectionDivider}</h3>
+                            <div class="slds-card">
+                                <c-custom-lookup field-label={newAccountPageLabels.accNameLabel} child-object-api-name='Contact'
+                                    target-field-api-name='AccountId' required onvalueselected={handleValueSelcted}>
+                                </c-custom-lookup>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:true={newAccountPage}>
+                        <div class="slds-p-around_medium">
+                            <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.generalAccInfoDivider}</h3>
+
+                            <div>
+                                <lightning-layout>
+                                    <lightning-layout-item size="8">
+                                        <lightning-input label={newAccountPageLabels.accNameLabel} type="text"
+                                            onchange={handleAccountName} value={myAccountRecord.Name} required=true>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item size="8">
+                                        <lightning-combobox label={newAccountPageLabels.accIndustryLabel} value={value}
+                                            options={industryValues.data.values} onchange={handleAccountIndusrty}>
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item size="8">
+                                        <lightning-input label={newAccountPageLabels.accPhoneLabel} type="text"
+                                            onchange={handleAccountPhone} value={myAccountRecord.Phone}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <div class="slds-p-around_medium"></div>
+                                <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.accAddressInfoDivider}
+                                </h3>
+                                <div class="slds-p-around_medium"></div>
+                                <lightning-layout>
+                                    <lightning-layout-item size="12">
+                                        {newAccountPageLabels.accBillingAddressLabel}
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item size="12">
+                                        <lightning-input label={newAccountPageLabels.accBillingStreetLabel} type="text"
+                                            onchange={handleAccountBillingStreet} value={myAccountRecord.BillingStreet}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item size="7">
+                                        <lightning-input label={newAccountPageLabels.accBillingcityLabel} type="text"
+                                            onchange={handleAccountBillingCity} value={myAccountRecord.BillingCity}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="1"></lightning-layout-item>
+                                    <lightning-layout-item size="4">
+                                        <lightning-input label={newAccountPageLabels.accBillingStateLabel} type="text"
+                                            onchange={handleAccountBillingState} value={myAccountRecord.BillingState}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout>
+                                    <lightning-layout-item size="7">
+                                        <lightning-input label={newAccountPageLabels.accBillingCodeLabel} type="text"
+                                            onchange={handleAccountBilingcode}
+                                            value={myAccountRecord.BillingPostalCode}></lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="1"> </lightning-layout-item>
+                                    <lightning-layout-item size="4">
+                                        <lightning-input label={newAccountPageLabels.accBillingCountryLabel} type="text"
+                                            onchange={handleAccountBillingCountry}
+                                            value={myAccountRecord.BillingCountry}></lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </div>
+                    </template>
+                    <!--*******************************************************************New Account Page-->
+                    <!-- Display The Details-->
+                    <div>
+                        <div class="slds-p-around_medium">
+                            <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.selectedAccInfoDivider}</h3>
+                            <div class="slds-p-around_medium"></div>
+                            <template if:true={accountRecord}>
+                                <template for:each={accountRecord} for:item="a">
+                                    <p key={a.Id}>{newAccountPageLabels.accNameLabel} : {a.Account.Name}</p>
+                                    <p key={a.Id}>{newAccountPageLabels.accNumberLabel} : {a.Account.AccountNumber}</p>
+                                    <p key={a.Id}>{newAccountPageLabels.accOwnerLabel} : {a.Account.Owner.Name}</p>
+                                    <p key={a.Id}>{newAccountPageLabels.accIndustryLabel} : {a.Account.Industry}</p>
+                                </template>
+                            </template>
+                            <template if:true={accountRecord1}>
+                                <template for:each={accountRecord1} for:item="b">
+                                    <p key={b.Id}>{newAccountPageLabels.accNameLabel} : {b.Name}</p>
+                                    <p key={b.Id}>{newAccountPageLabels.accNumberLabel} : {b.AccountNumber}</p>
+                                    <p key={b.Id}>{newAccountPageLabels.accOwnerLabel} : {b.Owner.Name}</p>
+                                    <p key={b.Id}>{newAccountPageLabels.accIndustryLabel} : {b.Industry}</p>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+
+
+                </div>
+            </template>
+
+            <template if:true={conid1}>
+                <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.accInfoDivider}</h3>
+                <template if:true={accountDetails}>
+                    <div class="slds-m-left_large">
+                        <lightning-layout>
+                            <lightning-layout-item size="1"></lightning-layout-item>
+                            <lightning-layout-item size="2">{newAccountPageLabels.accNameLabel} </lightning-layout-item>
+                            <lightning-layout-item size="1">:</lightning-layout-item>
+                            <lightning-layout-item size="2">{myName}</lightning-layout-item>
+                            <lightning-layout-item size="6"></lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout>
+                            <lightning-layout-item size="1"></lightning-layout-item>
+                            <lightning-layout-item size="2">{newAccountPageLabels.accNumberLabel}
+                            </lightning-layout-item>
+                            <lightning-layout-item size="1">:</lightning-layout-item>
+                            <lightning-layout-item size="2">{myAccountNumber}</lightning-layout-item>
+                            <lightning-layout-item size="6"></lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout>
+                            <lightning-layout-item size="1"></lightning-layout-item>
+                            <lightning-layout-item size="2"> {newAccountPageLabels.accOwnerLabel}
+                            </lightning-layout-item>
+                            <lightning-layout-item size="1">:</lightning-layout-item>
+                            <lightning-layout-item size="2">{myOwner}</lightning-layout-item>
+                            <lightning-layout-item size="6"></lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+                <template if:false={accountDetails}>
+                    <div class="slds-m-around_medium">
+                        <h1>No Data Found !</h1></br>
+                    </div>
+                </template>
+
+                <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.conInfoDivider</h3>
+                <template if:true={contactDetails}>
+                    <div class="slds-m-left_large">
+                        <lightning-layout>
+                            <lightning-layout-item size="1"></lightning-layout-item>
+                            <lightning-layout-item size="2">{newConPageLabels.conFirstNameLabel}
+                            </lightning-layout-item>
+                            <lightning-layout-item size="1">:</lightning-layout-item>
+                            <lightning-layout-item size="2">{myFirstName}</lightning-layout-item>
+                            <lightning-layout-item size="6"></lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout>
+                            <lightning-layout-item size="1"></lightning-layout-item>
+                            <lightning-layout-item size="2">{newConPageLabels.conLastNameLabel} </lightning-layout-item>
+                            <lightning-layout-item size="1">:</lightning-layout-item>
+                            <lightning-layout-item size="2">{myLastName}</lightning-layout-item>
+                            <lightning-layout-item size="6"></lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout>
+                            <lightning-layout-item size="1"></lightning-layout-item>
+                            <lightning-layout-item size="2"> {newConPageLabels.conPhoneLabel} </lightning-layout-item>
+                            <lightning-layout-item size="1">:</lightning-layout-item>
+                            <lightning-layout-item size="2">{myPhone}</lightning-layout-item>
+                            <lightning-layout-item size="6"></lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout>
+                            <lightning-layout-item size="1"></lightning-layout-item>
+                            <lightning-layout-item size="2"> {newConPageLabels.conEmailLabel} </lightning-layout-item>
+                            <lightning-layout-item size="1">:</lightning-layout-item>
+                            <lightning-layout-item size="2">{myEmail}</lightning-layout-item>
+                            <lightning-layout-item size="6"></lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+                <template if:false={contactDetails}>
+                    <div class="slds-m-around_medium">
+                        <h1>No Contact Information Found !</h1></br>
+                    </div>
+                </template>
+            </template>
+
+            <!--Buttons for step-1-->
+            <div>
+                <lightning-layout class="slds-align_absolute-center">
+                    <lightning-layout-item>
+
+                        <lightning-button variant="brand" label={ButtonNameLabels.cancelButtonLabel}
+                            onclick={handleCancle} class="slds-m-left_x-large"></lightning-button>
+
+                        <template if:true={isEnablePrev}>
+                            <lightning-button variant="brand" label={ButtonNameLabels.previousButtonLabel}
+                                onclick={handlePrevStep1} class="slds-m-left_x-large"></lightning-button>
+                        </template>
+                        <template if:true={isEnableNext}>
+                            <lightning-button label={ButtonNameLabels.nextButtonLabel} variant="brand"
+                                onclick={handleNextStep1} class="slds-m-left_x-large"></lightning-button>
+                        </template>
+                        <template if:true={isEnableFinish}>
+                            <lightning-button label={ButtonNameLabels.createQuoteButtonLabel} variant="brand"
+                                onclick={handleFinish} class="slds-m-left_x-large"></lightning-button>
+                        </template>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+        <!--(############################################  END  -  1 ####################################################)-->
+
+
+        <!--(############################################  STEP  -  2 ####################################################)-->
+        <template if:true={isStepTwo}>
+            <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.selectOppInfoDivider}</h3>
+
+            <!--New,Existing Opportunity Radio Buttons Selection Here...-->
+            <div class="slds-col slds-size_2-of-12">
+                <lightning-radio-group name="radioGroupForOpportunity" label="" options={optionsForOpp}
+                    value={valueRadioOpp} type="radio" onchange={handleRadioChange3}>
+                </lightning-radio-group>
+            </div>
+
+            <template if:true={existingOppPage}>
+                <template if:true={opportunityRecords}>
+                    <lightning-datatable data={opportunityRecords} columns={columns} key-field="id"
+                        onrowselection={handleRowSelection} max-row-selection="1">
+
+                    </lightning-datatable>
+                </template>
+                <template if:true={noRecs}>
+                    <h2>No opportunities under this account! Please create a new opportunity</h2>
+                </template>
+            </template>
+            <!-- New Opportunity-->
+            <template if:true={newOppPage}>
+                <div class="slds-p-around_medium">
+                    <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.generalOppInfoDivider}</h3>
+                    <lightning-record-edit-form object-api-name="Opportunity" class="oppForm"
+                        onsuccess={handleOppSuccess}>
+                        <lightning-input-field field-name='AccountId' value={finalAccountId} disabled="">
+                        </lightning-input-field>
+                        <lightning-input-field field-name='Name' value={oppName} onchange={handleChangeOppName}>
+                        </lightning-input-field>
+                        <lightning-input-field field-name='StageName' value={oppStageName}
+                            onchange={handleChangeOppStageName}></lightning-input-field>
+                        <lightning-input-field field-name='CloseDate' value={oppCloseDate}
+                            onchange={handleChangeOppCloseDate}></lightning-input-field>
+                        <lightning-button type="submit" class="slds-hidden">
+                        </lightning-button>
+                    </lightning-record-edit-form>
+                </div>
+            </template>
+
+            <!-- Displaying the selected Opportunity Record Details-->
+            <div class="slds-p-around_medium">
+                <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.selectedOppInfoDivider}</h3>
+                <div class="slds-p-around_medium"></div>
+                <template if:true={opportunityRecord}>
+                    <template for:each={opportunityRecord} for:item="a">
+                        <p key={a.Id}>{opportunityObjectLabels.oppNameLabel} : {a.Name}</p>
+                        <p key={a.Id}>{opportunityObjectLabels.oppStagenameLabel} : {a.StageName}</p>
+                        <p key={a.Id}>{opportunityObjectLabels.oppCloseDateLabel} : {a.CloseDate}</p>
+                    </template>
+                </template>
+            </div>
+            <!--Buttons for step -2-->
+            <div>
+                <lightning-layout class="slds-align_absolute-center">
+                    <lightning-layout-item>
+                        <lightning-button variant="brand" label={ButtonNameLabels.cancelButtonLabel}
+                            onclick={handleCancle} class="slds-m-left_x-large"></lightning-button>
+                        <template if:true={isEnablePrev}>
+                            <lightning-button variant="brand" label={ButtonNameLabels.previousButtonLabel}
+                                onclick={handlePrevStep2} class="slds-m-left_x-large"></lightning-button>
+                        </template>
+                        <template if:true={isEnableNext}>
+                            <lightning-button label={ButtonNameLabels.nextButtonLabel} variant="brand"
+                                onclick={handleNextStep2} class="slds-m-left_x-large"></lightning-button>
+                        </template>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+
+        </template>
+        <!--(############################################  END  -  2 ####################################################)-->
+
+        <!--(############################################  STEP  -  3 ####################################################)-->
+        <template if:true={isStepThree}>
+
+            <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.accInfoDivider}</h3>
+            <template if:true={accountDetails}>
+                <div class="slds-m-left_large">
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2">{newAccountPageLabels.accNameLabel} </lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myName}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2">{newAccountPageLabels.accNumberLabel} </lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myAccountNumber}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2"> {newAccountPageLabels.accOwnerLabel}</lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myOwner}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </template>
+            <template if:false={accountDetails}>
+                <div class="slds-m-around_medium">
+                    <h1>No Data Found !</h1></br>
+                </div>
+            </template>
+
+
+            <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.conInfoDivider}</h3>
+            <template if:true={contactDetails}>
+                <div class="slds-m-left_large">
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2">{newConPageLabels.conFirstNameLabel}</lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myFirstName}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2">{newConPageLabels.conLastNameLabel}</lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myLastName}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2">{newConPageLabels.conPhoneLabel}</lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myPhone}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2">{newConPageLabels.conEmailLabel}</lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myEmail}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </template>
+            <template if:false={contactDetails}>
+                <div class="slds-m-around_medium">
+                    <h1>No Contact Information Found !</h1></br>
+                </div>
+            </template>
+
+
+            <h3 class="slds-section-title--divider">{sectionTitleDividerLabels.oppInfoDivider}</h3>
+            <template if:true={opportunityDetails}>
+                <div class="slds-m-left_large">
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2">{opportunityObjectLabels.oppNameLabel} </lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myOppName}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2">{opportunityObjectLabels.oppStagenameLabel}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myStageName}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-layout>
+                        <lightning-layout-item size="1"></lightning-layout-item>
+                        <lightning-layout-item size="2"> {opportunityObjectLabels.oppCloseDateLabel}
+                        </lightning-layout-item>
+                        <lightning-layout-item size="1">:</lightning-layout-item>
+                        <lightning-layout-item size="2">{myCloseDate}</lightning-layout-item>
+                        <lightning-layout-item size="6"></lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </template>
+            <template if:false={opportunityDetails}>
+                <div class="slds-m-around_medium">
+                    <h1>No Opportunity Information Found !</h1></br>
+                </div>
+            </template>
+
+
+            <!--Buttons for step-3-->
+            <div>
+                <lightning-layout class="slds-align_absolute-center">
+                    <lightning-layout-item>
+                        <lightning-button variant="brand" label={ButtonNameLabels.cancelButtonLabel}
+                            onclick={handleCancle} class="slds-m-left_x-large"></lightning-button>
+                        <template if:true={isEnablePrev}>
+                            <lightning-button variant="brand" label={ButtonNameLabels.previousButtonLabel}
+                                onclick={handlePrevStep3} class="slds-m-left_x-large"></lightning-button>
+                        </template>
+                        <lightning-button label={ButtonNameLabels.createQuoteButtonLabel} variant="brand"
+                            onclick={handleFinish} class="slds-m-left_x-large"></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+        <!--(############################################  END  -  3 ####################################################)-->
+        <template if:true={isStepFour}>
+            <div class="slds-p-around_medium">
+
+                <!--contact lookup-->
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="combobox-id-1"
+                        id="combobox-label-id-343">{contractObjecLabels.contractNameLabel}</label>
+                    <div class="slds-form-element__control">
+                        <div class="slds-combobox_container">
+                            <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                                <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                    role="none">
+                                    <input type="search" class="slds-input slds-combobox__input" placeholder="Search..."
+                                        value={ContractSearchKey} onkeychange={handlecontractname}
+                                        onkeypress={handleGetContractSearch} onkeyup={handleGetContractSearch}
+                                        onkeydown={handleGetContractSearch} />
+                                    <span
+                                        class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                        <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default"
+                                            aria-hidden="true">
+                                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                    <template for:each={contractRecords} for:item="contract">
+                        <li role="presentation" class="slds-listbox__item" key={contract.Id} data-id={contract.Id}
+                            data-value={contract.ContractNumber} onclick={getTheContractData}>
+                            <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                role="option">
+                                <span class="slds-media__figure slds-listbox__option-icon">
+                                    <span class="slds-icon_container slds-icon-standard-contract">
+                                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contract">
+                                            </use>
+                                        </svg>
+                                    </span>
+                                </span>
+                                <span class="slds-media__body">
+                                    <span
+                                        class="slds-listbox__option-text slds-listbox__option-text_entity">{contract.ContractNumber}</span>
+                                </span>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+
+            </div>
+
+            <div>
+                <lightning-layout class="slds-align_absolute-center">
+                    <lightning-layout-item>
+
+                        <lightning-button variant="brand" label={ButtonNameLabels.cancelButtonLabel}
+                            onclick={handleCancle} class="slds-m-left_x-large"></lightning-button>
+
+                        <template if:true={isEnablePrev}>
+                            <lightning-button variant="brand" label={ButtonNameLabels.previousButtonLabel}
+                                onclick={handlePrevStep4} class="slds-m-left_x-large"></lightning-button>
+                        </template>
+                        <template if:true={isEnableFinish}>
+                            <lightning-button label={ButtonNameLabels.createOrderButtonLabel} variant="brand"
+                                onclick={handleFinishInStep4} class="slds-m-left_x-large"></lightning-button>
+                        </template>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+    </lightning-card>
+</template>

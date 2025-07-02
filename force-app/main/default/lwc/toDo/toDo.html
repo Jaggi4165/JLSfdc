@@ -1,0 +1,52 @@
+<template>
+
+    <lightning-card >
+    <lightning-layout-item size="11">
+                 <lightning-input type='text' id='task' placeholder='Please Give Your ToDo Task ?' ></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item size="1">
+                <lightning-button-icon  padding-top=5px icon-name="utility:add" title="Add" onclick={addToDoList}> </lightning-button-icon>  
+            </lightning-layout-item>
+<h1 class=slds-align_absolute-center>TODO</h1>
+<hr>
+<template for:each={listOfTasks} for:item="listOfTask">
+    
+        <lightning-layout class="item-class" key={listOfTask} >
+            <lightning-layout-item size="2">
+
+            </lightning-layout-item>
+            <lightning-layout-item size="5"><h1>{listOfTask}</h1></lightning-layout-item>
+            <lightning-layout-item size="3">
+                <lightning-input  type="checkbox" vanamelue={listOfTask} onchange={deleteTask}></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item size="2"></lightning-layout-item>
+
+        </lightning-layout>
+</template>
+
+
+
+<h1 class=slds-align_absolute-center><b>Done</b></h1>
+<hr>
+<template for:each={listOfDeletedTasks} for:item="listOfDeletedTask">
+    
+        <lightning-layout class="item-class" key={listOfDeletedTask} >
+            <lightning-layout-item size="2">
+
+            </lightning-layout-item>
+            <lightning-layout-item size="5">
+                <h1>name={listOfDeletedTask}</h1>
+            </lightning-layout-item>
+            <lightning-layout-item size="3">
+                Task Done !
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+                
+            </lightning-layout-item>
+
+        </lightning-layout>
+</template>
+
+
+    </lightning-card>
+</template>

@@ -1,0 +1,9 @@
+<template>
+    <lightning-card  variant="Narrow"  title="LWC Day-9 Assignment" icon-name="standard:account">
+        <div class="slds-box clds-p-around_small">
+            <p>This is parent component and display ULR link below:</p><br/>
+            <a herf="#">{valueFromChild}</a>
+        </div>
+        <c-child-assignment-day9 onbtnclick={onButtonClick}></c-child-assignment-day9>
+    </lightning-card>
+</template>

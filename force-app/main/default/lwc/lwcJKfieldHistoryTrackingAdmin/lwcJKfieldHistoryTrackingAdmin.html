@@ -1,0 +1,88 @@
+<template>
+    <div class=" slds-size_1-of-1 container">
+        <!-- Spinner     -->
+        <template if:true={isLoading}>
+            <lightning-spinner
+                    alternative-text="Loading"
+                    variant="brand" size="medium"
+                    class={spinnerClass}>
+            </lightning-spinner>
+        </template>
+
+        <div class="slds-p-horizontal_medium slds-p-top_small slds-p-bottom_x-small tab-header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-text-default " title="Field History Tracker Administrator">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                            <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#settings"></use>
+                        </svg>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <div class="slds-card__header-title slds-truncate">
+                        <span>Field History Tracker Administrator</span>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div class="slds-is-relative slds-size_1-of-4 slds-p-horizontal_large">
+            <template if:true={isLookupLoading}>
+                <lightning-spinner
+                        alternative-text="Loading"
+                        variant="brand" size="small"
+                        class="slds-is-absolute">
+                </lightning-spinner>
+            </template>
+
+            <div class="slds-text-title_bold">Add object for tracking:</div>
+            <c-trc-lookup
+                    label=""
+                    errors={errors}
+                    selection={selectedObjects}
+                    onsearch={handleLookupSearch}
+                    onclick={handleLookupClick}
+                    onselectionchange={handleLookupSelect}
+                    placeholder="Select object"
+                    scroll-after-n-items="5">
+            </c-trc-lookup>
+        </div>
+
+        <template lwc:if={configs.length}>
+            <div class="slds-m-vertical_xxx-small slds-scrollable_y slds-p-horizontal_large">
+                <lightning-tabset class="track-tabset" variant="vertical" active-tab-value ="">
+                    <template for:each={configs} for:item='config'>
+                        <lightning-tab
+                                label={config.objectLabel}
+                                key={config.objectApiName}
+                                data-id={config.objectApiName}
+                                onactive={handleTabSelect}
+                        >
+                            <c-trc-admin-object
+                                    config={config}
+                                    onfieldchange={handleFieldChange}
+                                    onbypass={handleFilterFieldSelect}
+                                    ongroupselect={handleGroupFieldSelect}
+                                    oncontrolledselect={handleControlledFieldSelect}
+                                    onallselect={handleFieldsSelect}
+                                    ondeselect={handleFieldsDeselect}
+                                    onsave={saveSettingObject}
+                                    ondelete={handleConfirmClick}
+                                    ontoggle={handleActiveState}
+                            ></c-trc-admin-object>
+                        </lightning-tab>
+                    </template>
+                </lightning-tabset>
+            </div>
+        </template>
+
+        <template lwc:else>
+            <div class="slds-illustration slds-illustration_large slds-m-vertical_medium not-found" aria-hidden="true">
+                <img src="/img/chatter/Desert.svg" class="slds-illustration__svg" alt=""/>
+                <div class="slds-text-color_weak">
+                    <h3 class="slds-text-heading_medium">No configuration found</h3>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

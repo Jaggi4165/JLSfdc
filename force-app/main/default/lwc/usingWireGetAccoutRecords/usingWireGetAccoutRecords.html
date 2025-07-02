@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Contacts List">
+        <lightning-datatable if:true={contas.data}
+        key-field="id"
+        data={contacts.data}
+        columns={columns}>
+    </lightning-datatable>
+    </lightning-card>
+    
+</template>

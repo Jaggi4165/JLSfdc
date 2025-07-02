@@ -1,0 +1,18 @@
+<apex:page controller="ApexClassForFetchAccounts" lightningStylesheets="true" >
+    <apex:form >
+        <center><h1>
+            My Opportunuties</h1> <h5>(Based on Opportunities Stages)</h5>
+            </center>
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:inputField value="{!opp.StageName}" >
+                    <apex:actionSupport event="onchange" action="{!showOpp}" reRender="pbt"/>
+                </apex:inputField>
+            </apex:pageBlockSection>
+            <apex:pageBlockTable value="{!opportunities}" var="a" id="pbt">
+                <apex:column value="{!a.Name}" />
+                <apex:column value="{!a.StageName}" />
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

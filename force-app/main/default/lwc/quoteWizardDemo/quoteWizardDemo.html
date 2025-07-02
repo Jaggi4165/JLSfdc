@@ -1,0 +1,394 @@
+<template >
+    
+    <lightning-card title="Quote Wizard  Creation KJR">
+  <!-- Progress Indicator -->
+
+        <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+            <lightning-progress-step label="Add Contact and Account" value="1" onclick={handleOnStepClick}></lightning-progress-step>
+            <lightning-progress-step label="Add Opportunity" value="2" onclick={handleOnStepClick}></lightning-progress-step>
+            <lightning-progress-step label="Review and Create Quote" value="3" onclick={handleOnStepClick}></lightning-progress-step>
+        </lightning-progress-indicator>
+         
+
+        
+        <!--(############################################Step-1####################################################)-->
+        <template if:true={isStepOne}>
+            <div>
+                <div class="slds-p-around_medium">
+
+                    <h3 class="slds-section-title--divider">Step :1.1 Select Contact Information</h3>
+
+                    <!--New,Existing Contact Radio Buttons Selection Here...-->
+                    <div class="slds-col slds-size_2-of-12">
+                        <lightning-radio-group name="radioGroupForContact"
+                            label="" options={optionsForContact} value={value1} type="radio" onchange={handleRadioChange}>
+                        </lightning-radio-group>
+                    </div>
+
+                    <div class="slds-col slds-size_10-of-12">
+                        <!--****************************************************Existing Contact page*******************************************-->
+                        <template if:true={existingContactPage}>
+                            <div class="slds-p-around_medium">
+                            
+                                <!--contact lookup-->
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="combobox-id-1" id="combobox-label-id-33">Contact Name</label>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-combobox_container">
+                                            <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                                                <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                                    <input type="search" class="slds-input slds-combobox__input"  placeholder="Search..." value={ContactSearchKey} onkeypress={handleGetContactSearch} onkeyup={handleContactSearch} onkeydown={handleContactSearch}/>
+                                                    <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                        <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+                                                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={contactRecords} for:item="con">
+                                        <li role="presentation" class="slds-listbox__item" key={con.Id} data-id={con.Id} value={con.Name} onclick={getTheData}>
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                <span class="slds-media__figure slds-listbox__option-icon">
+                                                    <span class="slds-icon_container slds-icon-standard-account">
+                                                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                        </svg>
+                                                    </span>
+                                                </span>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{con.Name}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                                
+                            </div>
+                        </template> 
+
+
+                        <!-- ************************************************New Contact Page***********************************************-->
+                        <template if:true={newContactPage}>
+                            <div class="slds-p-around_medium">
+                               
+                                <lightning-record-edit-form object-api-name="Contact"  onsuccess={handleContactSuccess}>
+                                    <div>
+                                        <h3 class="slds-section-title--divider">General Contact Information</h3>
+                                        <div class="slds-p-around_medium">
+                                        
+                                            <lightning-input-field field-name='Name' value={contactName}></lightning-input-field>
+                                            <lightning-input-field field-name='Phone' value={contactPhone}></lightning-input-field>
+                                            <lightning-input-field field-name='Email' value={contactEmail} ></lightning-input-field>
+                                        </div>
+                                        <h3 class="slds-section-title--divider">Contact Address Information</h3>
+                                        <div class="sslds-p-around_medium">
+                                            <lightning-input-field field-name='MailingAddress' value={contactAddress}></lightning-input-field>
+                                        </div>
+                                        <lightning-input-field field-name='AccountId' value={finalAccountId} class="slds-hidden" required></lightning-input-field>
+                                    </div>
+                                    <lightning-button class="slds-m-left_x-large" varient="brand" type="submit" name="Save" label="Create Contact">
+    
+                                    </lightning-button> 
+                                </lightning-record-edit-form>
+                            
+                                    
+                                    <!-- New , Existing Account Radio Button Selections-->
+                                    <div class="slds-col slds-size_2-of-12">
+                                
+                                        <lightning-radio-group name="radioGroupForAccount"
+                                            label="" options={optionsForAccount} value={value2} type="radio" onchange={handleRadioChange2}>
+                                        </lightning-radio-group>
+
+                                    </div>
+
+                                    
+                                    <!--*******************************************************************New Account Page-->
+                                    <template if:true={newAccountPage}>
+                                        <div class="acc-container">
+                                            <h3 class="slds-section-title--divider">General Account Information</h3>
+                                           
+                                            <template if:false={finalAccountId}>
+                                                <div class="slds-m-around--xx-large">
+                                                    <div class="container-fluid">
+                                                        <div class="form-group">
+                                                            <lightning-input label="Enter Account Name" name="accName" required="required" type="text" value={accRecord.Name} onchange={handleNameChange}></lightning-input>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <lightning-input label="Enter Phone Number" name="accPhone" type="number" value={accRecord.Phone} onchange={handlePhoneChange}></lightning-input>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <lightning-input label="Enter Account Type" name="accEmail" required="required" type="text" value={accRecord.BillingAddress} onchange={handleAddressChange}></lightning-input>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <lightning-input label="Enter Industry" name="accEmail" type="text" value={accRecord.Industry} onchange={handleIndustryChange}></lightning-input>
+                                                        </div>
+                                                    </div>
+                                                    <br/>
+                                                    <lightning-button label="Submit" onclick={handleSave} variant="brand"></lightning-button>
+                                                </div>
+                                                 
+                                            </template>                                   
+                                        </div>
+                                    </template> 
+                                    <!--******************************************************************Existing Account Page-->
+                                    <template if:true={existingAccountPage}>
+                                        <div class="slds-p-around_medium">
+                                            <h3 class="slds-section-title--divider">Select Existing Account Information</h3>
+                                                    <div class="slds-card">
+                                                        <c-custom-lookup field-label="Select Account Record" child-object-api-name='Contact'
+                                                            target-field-api-name='AccountId' required onvalueselected={handleValueSelcted}></c-custom-lookup>
+                                                        The selected record Id is:- {finalAccountId}
+                                                    </div>
+                                        </div>   
+                                </template>                                
+                            </div> 
+                        </template>
+                    </div>
+               
+                </div>
+                <!-- Display The Details-->
+                <div>
+                    <div class="slds-p-around_medium">
+                        <h3 class="slds-section-title--divider">STEP : 2.1 Select Account Information</h3>
+                        
+                        
+                    </div> 
+                </div>  
+            </div>
+        </template>
+        <!--(############################################  END  -  1 ####################################################)-->
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--(##############################################Step-2##################################################)-->
+        <template if:true={isStepTwo}>
+            <div class="slds-p-around_medium">
+                <div class="slds-col slds-size_2-of-12">
+                    <lightning-radio-group name="radioGroup"
+                        label="Create Opportunity :"
+                        options={optionsForOpp}
+                        value={value3}
+                        type="radio"
+                        onchange={handleRadioChange3}>   
+                    </lightning-radio-group>
+                </div>
+                <template if:true={newOppPage}>
+                    <div class="slds-p-around_medium">
+                        
+                                
+                        <lightning-record-edit-form object-api-name="Opportunity" onsuccess={handleOppSuccess}>
+                            <div>
+                                <h3 class="slds-section-title--divider">Opportunity Details</h3>
+                                <div class="slds-p-around_medium">
+                                    <lightning-input-field field-name='Name' value={oppName}></lightning-input-field>
+                                    <lightning-input-field field-name='StageName' value={oppPhone}></lightning-input-field>
+                                    <lightning-input-field field-name='CloseDate' value={oppCloseDate}></lightning-input-field>
+                                    <lightning-input-field field-name='AccountId' value={finalAccountId}></lightning-input-field>
+                                </div>
+                            </div>
+                        </lightning-record-edit-form>
+                    </div>   
+                </template>  
+             
+                <template if:true={existingOppPage}>
+                    <div class="slds-p-around_medium">
+                        <h3 class="slds-section-title--divider">Enter Existing Opportunity Information</h3>
+                        
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="combobox-id-1">Opportunity Name</label>
+                            <div class="slds-form-element__control">
+                                <div class="slds-combobox_container">
+                                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                            <input type="search" class="slds-input slds-combobox__input"  placeholder="Search..." value={oppSearchKey} onkeypress={handleGetOppSearch} onkeyup={handleGetOppSearch} onkeydown={handleOppSearch}/>
+                                            <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                            <template for:each={oppRecords} for:item="opp">
+                                <li role="presentation" class="slds-listbox__item" key={opp.Id} data-id={opp.Id} value={opp.Name} onclick={getTheDataOpp}>
+                                    <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                        <span class="slds-media__figure slds-listbox__option-icon">
+                                            <span class="slds-icon_container slds-icon-standard-account">
+                                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                                                </svg>
+                                            </span>
+                                        </span>
+                                        <span class="slds-media__body">
+                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">{opp.Name}</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template> 
+            </div>
+        </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--(############################################Step-3###################################################)-->
+        <template if:true={isStepThree}>
+            <div class="slds-p-around_medium">
+                <h3 class="slds-section-title--divider">Contact Details</h3>
+
+               
+                <div>
+                    First Name :<br>
+                    Last Name:<br>
+                    Phone :<br>
+                    Email : <br> 
+                </div>
+
+                <h3 class="slds-section-title--divider">Account Details</h3>
+                
+                <div>
+                    Name :<br>
+                    AccountNumber :<br>
+                    Account Owner :<br>
+                </div>
+
+                <h3 class="slds-section-title--divider">Opportunity Details</h3>
+                
+                <div>
+                    Name :<br>
+                    Close Date :<br>
+                    Stage Name :<br>
+                </div>
+
+            </div>  
+        </template>
+         
+        <!--####################################  BUTTONS  ################################-->
+        <div>
+            <lightning-layout class="slds-align_absolute-center">
+                <lightning-layout-item>
+                    <template if:true={isEnablePrev}>
+                        <lightning-button variant="brand" label="Back" onclick={handlePrev} class="slds-m-left_x-large"></lightning-button>
+                    </template>
+                    <template if:true={isEnableNext}>
+                        <lightning-button label="Next" variant="brand" onclick={handleNext} class="slds-m-left_x-large"></lightning-button>
+                    </template>
+                    <template if:true={isEnableFinish}>
+                        <lightning-button label="Create Quote" variant="brand" onclick={handleFinish} class="slds-m-left_x-large"></lightning-button>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+    </lightning-card>
+
+</template>

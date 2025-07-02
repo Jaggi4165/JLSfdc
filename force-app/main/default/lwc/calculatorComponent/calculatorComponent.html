@@ -1,0 +1,33 @@
+<template>
+    <lightning-card>
+        <div>
+            <h1 align='center'>Calculator</h1>
+            <div>
+                <lightning-record-edit-form class="slds-box">
+                    <h1>First Number : </h1>
+                    <lightning-input type='number' onchange={eventHandlerOne} value={firstNumber}></lightning-input>
+                    <h1>Second Number : </h1>
+                    <lightning-input type='number' onchange={eventHandlerTwo} value={secondNumber}></lightning-input>
+                </lightning-record-edit-form>
+            </div>
+            <div>
+               <b>Result {firstNumber}{symbol}{secondNumber} is {result}</b>
+            </div>
+            <div>
+                <lightning-button name='addition' label='Addition' onclick={addtionFunction}></lightning-button>
+                <lightning-button name='subtraction' label='subtraction' onclick={subtractFunction}></lightning-button>
+                <lightning-button name='multiplication' label='Multiplication' onclick={multiplicationFunction}></lightning-button>
+                <lightning-button name='division' label='Division' onclick={divisionFunction}></lightning-button>
+            </div>
+        </div>
+        <div>
+            <h1>Previous Results</h1>
+            <template for:each={allResults} for:item="it">
+                <p class="item-class" key={it}>
+                    {it}
+                </p>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

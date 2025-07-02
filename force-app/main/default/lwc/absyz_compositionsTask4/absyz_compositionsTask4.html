@@ -1,0 +1,54 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Day 4 Assignment" icon-name="custom:custom14">
+        <div class="slds-p-around_medium">
+        <template if:true={contacts}>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Contact Name">Contact Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Title">Title</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Phone">Phone</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Email">Email</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Contact Owner">Contact Owner</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={contacts} for:item="contact">
+                    <tr key={contact.Id}>
+                        <td data-label="Contact Name">
+                            <div class="slds-truncate" title={contact.Name}>{contact.Name}</div>
+                        </td>
+                        <td data-label="Title">
+                            <div class="slds-truncate" title={contact.Title}>{contact.Title}</div>
+                        </td>
+                        <td data-label="Phone">
+                            <div class="slds-truncate" title={contact.Phone}>{contact.Phone}</div>
+                        </td>
+                        <td data-label="Email">
+                            <div class="slds-truncate" title={contact.Email}>{contact.Email}</div>
+                        </td>
+                        <td data-label="Contact Owner">
+                            <div class="slds-truncate" title={contact.Owner.Name}>{contact.Owner.Name}</div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template>
+    <template if:true={error}>
+        <p class="slds-text-color_error">Error loading contacts</p>
+    </template>
+
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,8 @@
+<template>
+    <lightning-card title="Child (Task-2,3)">
+    <p>Input From Parent : {parentinput} </p>
+
+    <lightning-input type="text" onchange={onTextChange} value={text} label="Enter Text to Pass to Parent" placeholder="type here..."></lightning-input>
+    <lightning-button variant="brand" onclick={onButtonClickHandle} label="Pass Data to Prent"></lightning-button>
+    </lightning-card>
+</template>

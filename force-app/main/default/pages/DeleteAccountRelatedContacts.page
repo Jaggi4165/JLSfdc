@@ -1,0 +1,10 @@
+<apex:page lightningStylesheets="true">
+    <apex:form >
+    <apex:pageBlock title="Delete my Contacts">
+    	<apex:pageBlockSection >
+          <apex:commandButton action="{!deleteContacts}" title="Delete" value="Delete My Contacts"/>       
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>
+<!--controller="ApexClassForDeleteContacts" -->

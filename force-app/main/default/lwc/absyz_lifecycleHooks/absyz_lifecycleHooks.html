@@ -1,0 +1,13 @@
+<template>
+    <lightning-card  title="Lifecycle Hooks" icon-name="standard:account">
+        <div class="slds-p-around_medium">
+            <b>Hello Jagadeeswar!</b>
+            <br/>
+            <lightning-input type="checkbox" name="showData" label="Show Data" onchange={handlerCheckBoxChange}></lightning-input>
+            <br/>
+            <div if:true={showData}>
+                Hello World ! My Name is {myName}
+            </div>
+        </div>
+    </lightning-card>
+</template>

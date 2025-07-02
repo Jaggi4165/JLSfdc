@@ -1,0 +1,90 @@
+<template>
+        <template class="source slds-p-top_large" lwc:if={records.length}>
+            <header lwc:if={isNotParentObject} class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <a href={recordURL} class="slds-text-link slds-p-around_small slds-truncate" title={parentId}>
+                        <span>{recordName}</span>
+                    </a>
+                    <span class="slds-icon_container slds-p-around_small slds-icon-text-default ">
+                                    <svg lwc:if={isUpdateOperation} class="slds-icon slds-icon_small" aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#record_update"></use>
+                                    </svg>
+                                    <svg lwc:if={isCreateOperation} class="slds-icon slds-icon_small" aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#record_create"></use>
+                                    </svg>
+                                    <svg lwc:if={isDeleteOperation} class="slds-icon slds-icon_small" aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#record_delete"></use>
+                                    </svg>
+                                </span>
+                </div>
+                <div class="slds-media__body">
+                    <div class="slds-truncate">
+                        <span>{operationDate}</span>
+                    </div>
+                </div>
+            </header>
+                <div class="slds-is-relative slds-grid_align-spread slds-grid">
+                    <div class="slds-p-bottom_large result-table">
+                        <c-trc-custom-data-table
+                            key-field="id"
+                            data={records}
+                            columns={tableColumns}
+                            sorted-by={sortedBy}
+                            sorted-direction={sortDirection}
+                            onsort={handleSortData}
+                            hide-checkbox-column
+                            wrap-text-max-lines = 1
+                            onrowaction={handleClick}
+                        ></c-trc-custom-data-table>
+                    </div>
+                </div>
+
+                <div class="paginator">
+                    <div class="slds-align_absolute-center">
+                        <c-trc-paginator
+                                total-recs={totalRecords}
+                                items-per-page={itemsPerPage}
+                                onchangepage={handlePageChange}>
+                        </c-trc-paginator>
+                    </div>
+                </div>
+
+        </template>
+
+
+<!--    Expanded values modal popup-->
+    <template lwc:if={showExpandedPopup}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                                                               class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={handlePopupClose}>
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <div class="slds-modal__content value-content" id="modal-content-id-1">
+                    <div class="slds-text-title_bold slds-p-around_small modal-header">{expandedRow.fieldLabel}</div>
+
+                    <div class="slds-grid slds-grid_vertical-align-start slds-grid_align-spread table-height slds-nowrap">
+                        <div class="slds-col slds-size_1-of-2 slds-p-left_small value-column">
+                            <div class="slds-text-title_bold">Original Value</div>
+                            <div class="slds-box_border value-box slds-scrollable_y">
+                                <lightning-formatted-rich-text value={expandedRow.oldValue}></lightning-formatted-rich-text>
+                            </div>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_small value-column">
+                            <div class="slds-text-title_bold">New Value</div>
+                            <div class="slds-box_border value-box slds-scrollable_y">
+                                <lightning-formatted-rich-text value={expandedRow.newValue}></lightning-formatted-rich-text>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

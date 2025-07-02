@@ -1,0 +1,9 @@
+<apex:page controller="RepeatCon" id="thePage" lightningStylesheets="true">
+ 
+    <apex:repeat value="{!strings}" var="string" id="theRepeat">
+ 
+        <apex:outputText value="{!string}" id="theValue"/><br/>
+ 
+    </apex:repeat>
+ 
+</apex:page>

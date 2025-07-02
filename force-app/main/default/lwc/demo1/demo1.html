@@ -1,0 +1,226 @@
+<template >
+    
+    <lightning-card title="Quote Wizard  Creation KJR">
+  <!-- Progress Indicator -->
+
+        <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+            <lightning-progress-step label="Add Contact and Account" value="1" onclick={handleOnStepClick}></lightning-progress-step>
+            <lightning-progress-step label="Add Opportunity" value="2" onclick={handleOnStepClick}></lightning-progress-step>
+            <lightning-progress-step label="Review and Create Quote" value="3" onclick={handleOnStepClick}></lightning-progress-step>
+        </lightning-progress-indicator>
+         
+
+        
+        <!--(############################################Step-1####################################################)-->
+        <template if:true={isStepOne}>
+            <div class="slds-p-around_medium">
+                <h3 class="slds-section-title--divider">Step :1.1 Select Contact Information</h3>
+
+                <!--New,Existing Contact Radio Buttons Selection Here...SS-->
+                <div class="slds-col slds-size_2-of-12">
+                    <lightning-radio-group name="radioGroupForContact"
+                        label="" options={optionsForContact} value={value1} type="radio" onchange={handleRadioChange}>
+                    </lightning-radio-group>
+                </div>
+
+                <div class="slds-col slds-size_10-of-12">
+                    <!--Existing Contact page-->
+                    <template if:true={existingContactPage}>
+                        <div class="slds-p-around_medium">
+                            <h3 class="slds-section-title--divider">Enter Contact Information</h3>                              
+                        </div>
+                        <!--Contacvt Lookup Field-->
+                   </template>
+                            
+
+
+                    <!-- New Contact Page-->
+                    <template if:true={newContactPage}>
+                        <div class="slds-p-around_medium">
+
+                            <lightning-record-edit-form object-api-name="Contact" columns="2" onsuccess={handleContactSuccess}>
+                                <div>
+                                    <h3 class="slds-section-title--divider">General Contact Information</h3>
+                                    <div class="slds-p-around_medium">
+                                        <lightning-input-field field-name='Name' value={contactName}></lightning-input-field>
+                                        <lightning-input-field field-name='Phone' value={contactPhone}></lightning-input-field>
+                                        <lightning-input-field field-name='Email' value={contactEmail}></lightning-input-field>
+                                    </div>
+                                    <h3 class="slds-section-title--divider">Contact Address Information</h3>
+                                    <div class="sslds-p-around_medium">
+                                        <lightning-input-field field-name='MailingAddress' value={contactAddress}></lightning-input-field>
+                                    </div>
+                                </div>
+
+                                <!--Account-->
+                                <div class="slds-col slds-size_2-of-12">
+                                    <h3 class="slds-section-title--divider">Account Information</h3>
+                                    <lightning-radio-group name="radioGroupForAccount"
+                                        label=""
+                                        options={optionsForAccount}
+                                        value={value2}
+                                        type="radio"
+                                        onchange={handleRadioChange2}>
+                            
+                                    </lightning-radio-group>
+    
+                                </div>
+                                <!--New Account Page-->
+                                <template if:true={newAccountPage}>
+                                    <div class="acc-container">
+                                        <template if:false={accountIDValid}>
+                                            <lightning-record-edit-form object-api-name="Account" columns="2" onsuccess={handleAccountSuccess}>
+                                                <div>
+                                                    <h3 class="slds-section-title--divider">General Account Information</h3>
+                                                    <div class="slds-p-around_medium">
+                                                        <lightning-input-field field-name='Name' value={accountName}></lightning-input-field>
+                                                        <lightning-input-field field-name='Phone' value={accountPhone}></lightning-input-field>
+                                                        <lightning-input-field field-name='Industry' value={accountIndustry}></lightning-input-field>
+                                                    </div>
+                                                    <h3 class="slds-section-title--divider">Account Address Information</h3>
+                                                    <div class="sslds-p-around_medium">
+                                                        <lightning-input-field field-name='BillingAddress' value={accountAddress}></lightning-input-field>
+                                                    </div>
+                                                    <div>
+                                                        <lightning-button class="slds-m-left_x-large" varient="success" type="submit" name="Save" label="Create Account">
+        
+                                                        </lightning-button>
+                                                    </div>
+                                                </div>
+                                            </lightning-record-edit-form>
+                                        </template>                                   
+                                    </div>
+                                    
+                                </template>
+                                <template if:true={existingAccountPage}>
+                                    <div class="slds-p-around_medium">
+                                        <h3 class="slds-section-title--divider">Select Existing Account Information</h3>
+                                            <div>
+                                                <lightning-record-edit-form object-api-name="Contact" id="createContactForm" >
+                                                    <lightning-input-field field-name="AccountId" variant="label-hidden" onchange={handleAccountSelection} required> </lightning-input-field>
+                                                </lightning-record-edit-form>
+                                            </div>
+                                    </div>   
+                                </template>
+ 
+                                <lightning-button class="slds-m-left_x-large" varient="brand" type="submit" name="Save" label="Create Contact">
+    
+                                </lightning-button>
+                            </lightning-record-edit-form>
+                                <!--Existing Account Page-->
+                                
+
+
+                                
+                                    
+                            <!-- New , Existing Account Radio Button Selections-->
+                            
+
+                        </div> 
+                    </template>
+
+                    
+
+                </div>
+                
+
+            </div>
+            <!-- Display The Details-->
+            <div>
+                <div class="slds-p-around_medium">
+                    <h3 class="slds-section-title--divider">STEP : 2.1 Selected Account Information</h3>
+                </div> 
+            </div>
+        </template>
+        <!--(############################################  END  -  1 ####################################################)-->
+
+ 
+        <!--(##############################################Step-2##################################################)-->
+        <template if:true={isStepTwo}>
+            <div class="slds-p-around_medium">
+                <div class="slds-col slds-size_2-of-12">
+                    <lightning-radio-group name="radioGroup"
+                        label="Create Opportunity :"
+                        options={optionsForOpp}
+                        value={value3}
+                        type="radio"
+                        onchange={handleRadioChange3}>   
+                    </lightning-radio-group>
+                </div>
+                <template if:true={newOppPage}>
+                    <div class="slds-p-around_medium">
+                        
+                                
+                        <lightning-record-edit-form object-api-name="Opportunity" onsuccess={handleOppSuccess}>
+                            <div>
+                                <h3 class="slds-section-title--divider">Opportunity Details</h3>
+                                <div class="slds-p-around_medium">
+                                    <lightning-input-field field-name='Name' value={oppName}></lightning-input-field>
+                                    <lightning-input-field field-name='StageName' value={oppPhone}></lightning-input-field>
+                                    <lightning-input-field field-name='CloseDate' value={oppCloseDate}></lightning-input-field>
+                                </div>
+                            </div>
+                        </lightning-record-edit-form>
+                    </div>   
+                </template>  
+             
+                <template if:true={existingOppPage}>
+                    <div class="slds-p-around_medium">
+                        <h3 class="slds-section-title--divider">Enter Existing Opportunity Information</h3>
+                    </div>
+                </template> 
+            </div>
+        </template>
+
+        <!--(############################################Step-3###################################################)-->
+        <template if:true={isStepThree}>
+            <div class="slds-p-around_medium">
+                <h3 class="slds-section-title--divider">Contact Details</h3>
+
+               
+                <div>
+                    First Name :<br>
+                    Last Name:<br>
+                    Phone :<br>
+                    Email : <br> 
+                </div>
+
+                <h3 class="slds-section-title--divider">Account Details</h3>
+                
+                <div>
+                    Name :<br>
+                    AccountNumber :<br>
+                    Account Owner :<br>
+                </div>
+
+                <h3 class="slds-section-title--divider">Opportunity Details</h3>
+                
+                <div>
+                    Name :<br>
+                    Close Date :<br>
+                    Stage Name :<br>
+                </div>
+
+            </div>  
+        </template>
+         
+        <!--####################################  BUTTONS  ################################-->
+        <div>
+            <lightning-layout class="slds-align_absolute-center">
+                <lightning-layout-item>
+                    <template if:true={isEnablePrev}>
+                        <lightning-button variant="brand" label="Back" onclick={handlePrev} class="slds-m-left_x-large"></lightning-button>
+                    </template>
+                    <template if:true={isEnableNext}>
+                        <lightning-button label="Next" variant="brand" onclick={handleNext} class="slds-m-left_x-large"></lightning-button>
+                    </template>
+                    <template if:true={isEnableFinish}>
+                        <lightning-button label="Create Quote" variant="brand" onclick={handleFinish} class="slds-m-left_x-large"></lightning-button>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+    </lightning-card>
+
+</template>

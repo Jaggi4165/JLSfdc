@@ -1,0 +1,26 @@
+<template>
+     <lightning-card title="Approval Request Manager">
+        <div class="slds-p-around_medium">
+            <lightning-combobox
+                name="objectSelector"
+                label="Select Object"
+                value={selectedObject}
+                options={objectOptions}
+                onchange={handleObjectChange}>
+            </lightning-combobox>
+        </div>
+
+        <template if:true={approvalList}>
+            <lightning-datatable
+                key-field="workitemId"
+                data={approvalList}
+                columns={columns}
+                onrowaction={handleRowAction}
+                hide-checkbox-column>
+            </lightning-datatable>
+        </template>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

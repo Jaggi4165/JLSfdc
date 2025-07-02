@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Refresh Apex Example" icon-name="standard:Opportunity">
+        <center>
+            <lightning-button label="Refresh Opportunity" 
+                            class="slds-paround_medium slds-p-bottom_small" 
+                            onclick={handleRefresh}></lightning-button>
+        </center>
+        <br/>
+        <template if:true={oppRecords}>
+            <lightning-datatable key-field="id"
+                                onrowselection={getSelectedRows} 
+                                data={oppRecords} 
+                                columns={columns}>
+            </lightning-datatable>
+        </template>
+    </lightning-card>
+
+    <lightning-card title="Action" icon-name="standard:Opportunity">
+        <center>
+            <lightning-button label="Delete" 
+                            class="slds-paround_medium slds-p-bottom_small" 
+                            onclick={deleteAllRecords}></lightning-button>
+        </center>
+    </lightning-card>
+</template>

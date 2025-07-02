@@ -1,0 +1,60 @@
+.reviewAnnouncement{
+    border: 1px solid #333333;
+    font-weight: normal;
+    size: 1rem;
+    background-color: #fdc68360;
+    margin-bottom:1px;
+    color: #181818;
+}
+
+.doNotEngageBadge {
+    background-color: red;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+  }
+
+.footerBox{
+    font-size: 0.8rem;
+    margin-top:1px; 
+    margin-bottom:3rem; 
+}
+.footerBoxAnnouncement{
+    font-size: 0.8rem;
+    margin-top:1px; 
+}
+
+.mainheader{
+    border: 1px lightgray;
+    border-radius: 0.1rem;
+    margin: 1rem;
+}
+
+.mainDiv {
+    background-color: lightgray;
+    box-sizing: border-box;
+    border-bottom: 1px solid #E2E2E2;
+    border-left: 1px solid #E2E2E2;
+    border-right: 1px solid #E2E2E2;
+    border-radius: 2pt;
+    font-family: 'Segoe UI',sans-serif;
+    width:100%!important;
+}
+
+.topDiv{
+    display: flex; 
+    justify-content: center;
+    width:100%!important;
+} 
+
+.inputPadding {
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.custom-checkbox-cell input{
+    border:2px solid blue; 
+}

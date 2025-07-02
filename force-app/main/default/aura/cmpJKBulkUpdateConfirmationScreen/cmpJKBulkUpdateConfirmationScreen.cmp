@@ -1,0 +1,28 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:availableForFlowScreens" access="global" >
+    <aura:attribute name="confirmScreenHeader" type="String" default="Confirm tasks closing?"/>
+    <aura:attribute name="confirmScreenBody" type="String" default="Do you want to close the open tasks?"/>
+    <div class="slds-box slds-theme_shade slds-theme_alert-texture slds-align_absolute-center">
+        <h2 class="slds-text-heading--medium">{!v.confirmScreenHeader}</h2>
+    </div>
+    
+    <div class="slds-modal__content slds-p-around--medium">
+        <div>
+            <lightning:layout>
+                <lightning:layoutItem class="left-align">
+                    <p>{!v.confirmScreenBody}</p>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </div>
+    
+    <div >
+        <lightning:layout class="slds-align_absolute-center">
+            <lightning:layoutItem class="right-align">
+                <button class="slds-button slds-button--neutral" onclick="{!c.fireCancelEvent}">Cancel</button>	
+                <button class="slds-button slds-button--brand" onclick="{!c.fireOkEvent}">Ok</button>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+    </div>     
+    <!-- Markup end here -->
+</aura:component>

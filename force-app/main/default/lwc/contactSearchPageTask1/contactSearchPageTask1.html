@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="contact search page">
+        <div>
+            <p>Enter your contact Details for search more :</p>
+            <lightning-input  label="FirstName" type="text" class="fname" required="true"></lightning-input>
+            <lightning-input  label="lastname"  type="text" class="lname" required="true"></lightning-input>
+            <lightning-input label="Email" type="email" class="email" required="true"></lightning-input>
+            <lightning-input label="Phone" type="text" class="phone" 
+                                pattern="[7-9]{1}[0-9]{9}"></lightning-input>
+            <lightning-button onclick={handleSearch}  label="Search"></lightning-button>
+        </div>
+        <div>
+            <!-- <lightning-card title="searched contact"> -->
+                <template if:true={contacts}>
+                 <lightning-datatable data={contacts} columns={columns} key-field="id">
+
+                 </lightning-datatable>
+                </template>
+                <template if:true={error}>
+                <h1>No Data Found</h1>>
+                </template>
+            <!-- </lightning-card> -->
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,43 @@
+<apex:page standardController="Contact" standardStylesheets="true" showHeader="false" sidebar="false" docType="html-5.0">
+    <html lang="en">
+        <head>
+            <title>Welcome to Harika Glamnation</title>
+        </head> 
+        
+        <body>
+        	<div >
+                <!--controller="customerCreationController"-->
+                Harika Glamnation
+            </div>
+            <div>
+                    <apex:form >
+
+        <apex:pageBlock title="Edit Contact">
+
+            <apex:pageBlockSection columns="1">
+
+                <apex:inputField value="{!Contact.FirstName}"/>
+
+                <apex:inputField value="{!Contact.LastName}"/>
+
+                <apex:inputField value="{!Contact.Email}"/>
+
+                <apex:inputField value="{!Contact.Birthdate}"/>
+
+            </apex:pageBlockSection>
+
+            <apex:pageBlockButtons >
+
+                <apex:commandButton action="{!save}" value="Save"/>
+
+            </apex:pageBlockButtons>
+
+        </apex:pageBlock>
+
+    </apex:form>
+
+
+            </div>
+        </body>
+   	</html>    
+</apex:page>

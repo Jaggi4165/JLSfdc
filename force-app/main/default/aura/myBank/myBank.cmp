@@ -1,0 +1,5 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <lightning:card title="{nameOfTheBank}" footer="Email : salesforcecodes123@gmail.com" iconName="standard:branch_merge">
+        Hi this is shown the usage of Lightning Card. 
+    </lightning:card>
+</aura:component>

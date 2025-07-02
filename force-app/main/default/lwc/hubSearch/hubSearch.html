@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="View Bikes data available in the Hub" custom-icon="custom:icon13">
+        <div class="slds slds-p-horizontal--medium">
+         <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_4-of-12 slds-m-bottom--medium">
+                <lightning-Input type="search" placeholder="Enter Hub Name" value={accountName} name="accountName" class="accountName" onchange={handleChangeAccName}></lightning-input>                 
+             </div>
+             <div class="slds-col slds-size_6-of-12 slds-m-top--medium" style="margin-top: 19px; margin-left: 10px;">                 
+                    <lightning-button label="Find" size="small" variant="brand" onclick={handleAccountSearch} icon-position="right"></lightning-button>
+             </div>
+         </div>
+          
+        
+           <table class="slds-table slds-table_cell-buffer slds-table_bordered" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+               <thead>
+                   <tr>
+                       <th>Vehicle Number</th>
+                       <th>KM Covered</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <template for:each={records} for:item="conItem">
+                       <tr key={conItem.Id}>
+                           <td>{conItem.Vehicle_No__c}</td>
+                           <td>{conItem.KMCovered__c}</td>
+                       </tr>
+                   </template>
+               </tbody>
+           </table>
+        </div>
+    </lightning-card>
+</template>

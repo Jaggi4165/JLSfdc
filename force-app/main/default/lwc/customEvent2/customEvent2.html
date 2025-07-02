@@ -1,0 +1,20 @@
+<template>
+    <lightning-card>
+        <lightning-layout>
+            <lightning-layout-item>
+                <b><h1>Accounts List</h1></b>
+                    <template for:each={accounts.data} for:item="account">
+                        <c-custom-Events key={account.Id} account={account} onselected={accountSelected}></c-custom-Events>
+                    </template>
+            </lightning-layout-item>
+            <lightning-layout-item>
+                <template if:true={selectedAccount}>
+                    <p><b>Account Name : {selectedAccount.Name}</b></p>
+                    <p><b>Phone : {selectedAccount.Phone}</b></p>
+                    <p><b>Industry : {selectedAccount.Industry}</b></p>
+                    <p><b>Rating : {selectedAccount.Rating}</b></p>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

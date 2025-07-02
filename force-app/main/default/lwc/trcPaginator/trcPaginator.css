@@ -1,0 +1,18 @@
+.vertical-align-center {
+    margin: auto 10px;
+}
+
+.customSelect select {
+    padding-right: 1rem;
+    min-height: inherit;
+    line-height: normal;
+    margin: 3px;
+}
+
+.customSelect .slds-select_container::before {
+    border-bottom: 0;
+}
+
+.customSelect .slds-select_container::after {
+    bottom: calc((2.75rem / 2) - 6px)!important;
+}

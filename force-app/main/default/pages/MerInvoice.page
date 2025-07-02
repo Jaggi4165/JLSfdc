@@ -1,0 +1,29 @@
+<apex:page controller="RetriveMerInvoice" sidebar="false" lightningStylesheets="true">
+    <apex:form >
+        <apex:outputText value="Enter Account Name:"></apex:outputText>
+        <apex:inputtext value="{!accName}" />
+        <apex:commandButton value="ShowContacts" action="{!showContacts}" rerender="out" status="mystatus"/><br/>
+        
+        <apex:actionstatus id="mystatus" starttext="please wait contacts are loading.......">
+            <apex:facet name="stop">
+                <apex:outputpanel id="out">
+                    <apex:pageBlock >
+                        <apex:pageBlockSection >
+                            <apex:pageBlockTable value="{!Contacts}" var="c" rendered="{!accName !=null}">
+                                <apex:column headerValue="Name">
+                                    {!c.Name}
+                                </apex:column>
+                                <apex:column headerValue="Phone">
+                                    {!c.Phone}
+                                </apex:column>
+                                <apex:column headerValue="Email">
+                                    {!c.Email}
+                                </apex:column>
+                            </apex:pageBlockTable>
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                </apex:outputpanel>
+            </apex:facet>
+        </apex:actionstatus>
+        </apex:form>
+</apex:page>

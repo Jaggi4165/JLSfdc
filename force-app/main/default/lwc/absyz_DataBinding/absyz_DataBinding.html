@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Data Binding">
+        <div class="slds-p-around_small">
+            <lightning-input type="checkbox" name="showData" label="Show Data" onchange={handlerCheckBoxChange}></lightning-input>
+            <br/>
+            <div if:true={showData}>
+                Hello World ! My Name is {myName}
+            </div>
+        </div>
+    </lightning-card>
+</template>

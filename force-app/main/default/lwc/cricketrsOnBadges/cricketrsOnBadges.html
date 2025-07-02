@@ -1,0 +1,10 @@
+<template>
+    <lightning-card>
+        <h1><b>My Cricketers</b></h1>
+        <template for:each={myPlayers} for:item="players">
+            <div class="slds-badge for-item" key={players}>
+                <b>{players}</b>
+            </div>
+        </template>
+</lightning-card>           
+</template>

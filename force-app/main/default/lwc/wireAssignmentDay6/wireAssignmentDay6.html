@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Assignment Day 6 & Task-1">
+        <div class="slds-p-around_small">
+            <b>Contact Details</b>
+        </div>
+        <div class="slds-p-around_small">
+            <ul class="slds-list_dotted">
+                <template for:each={contacts} for:item="con">
+                    <li key={con.Id}><b>Contact Name : </b> {con.Name}</li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
+
+    <lightning-card title="Assignment Day 6 & Task-2">
+       <div class="slds-p-around_small">
+           <lightning-input label="search Contact" value={searchKey} onchange={onHandleChange}></lightning-input>
+       </div>
+       <div class="slds-p-around_small">
+           <lightning-datatable
+               key-field="id"
+               data={contactsList}
+               columns={columnsList}>
+           </lightning-datatable>
+       </div>
+    </lightning-card>
+</template>

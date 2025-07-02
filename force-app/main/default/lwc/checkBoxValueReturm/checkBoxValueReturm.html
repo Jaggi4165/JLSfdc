@@ -1,0 +1,17 @@
+<template>
+    <lightning-card>
+    <lightning-input type="checkbox"
+                     label="Your Choice "
+                     name="checkBox"
+                     onclick={myHandlerCode}
+                     checked>
+    </lightning-input>
+    <template if:true={status}>
+        <p>CheckBox is Checked</p>
+    </template>
+    <template if:false={status}>
+        <p>CheckBox is Not Checked</p>
+    </template>
+    
+</lightning-card>
+    </template>

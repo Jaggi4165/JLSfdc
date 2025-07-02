@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Book Your Bike">
+        
+            <lightning-record-edit-form
+                record-id={recordId}
+                object-api-name=Booking__c>
+                <!--Other fields here -->
+                <lightning-input-field field-name="customer__c" class="contactName">
+                </lightning-input-field>
+                <lightning-input-field field-name="Bike__c" class="bike">
+                </lightning-input-field>
+                <lightning-input-field field-name="StartHub__c" class="starthub">
+                </lightning-input-field>
+                <lightning-input-field field-name="EndHub__c" class="endhub">
+                </lightning-input-field>
+                
+                 <lightning-button class="slds-m-top_small" label="Save" varient="brand" onclick={handleReset}></lightning-button>
+            </lightning-record-edit-form>
+        
+    </lightning-card>
+</template>

@@ -1,0 +1,34 @@
+<template>
+
+    <!-- Trailhead (https://trailhead.salesforce.com/content/learn/modules/lightning-web-components-and-salesforce-data/use-apex-to-work-with-data) -->
+        <lightning-datatable
+            key-field="id"
+            data={contacts.data}
+            hide-checkbox-column
+            columns={columnsList}>
+        </lightning-datatable>
+        <template if:true={errors}>
+        <p>{errors}</p>
+    </template>
+    <!---->
+
+    <!-- <template lwc:if={contacts.data}>
+        <template for:each={contacts.data} for:item="contact">
+            <a
+                href="#"
+                key={contact.Id}
+                data-contact-id={contact.Id}
+                onclick={handleSelect}
+            >
+                <lightning-layout>
+                    <lightning-layout-item>
+                        <img src={contact.Picture__c} alt="Profile photo" />
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="horizontal-small">
+                        <p>{contact.Name}</p>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </a>
+        </template>
+    </template> -->
+</template>

@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="ApexImperativeMethod With Parameters" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <div>
+                Enter your contact : <lightning-input onchange={handleKeyChange}></lightning-input>
+                <lightning-button onclick={handleSearch} label="Search"></lightning-button>
+            </div>
+            <template if:true={contacts}>
+                <template for:each={contacts} for:item="contact">
+                    <p key={contact.Id}>{contact.Name}</p>
+                </template>
+            </template>
+            <template if:true={error}>
+              {error}>
+            </template>
+        </div>
+    </lightning-card>
+
+</template>

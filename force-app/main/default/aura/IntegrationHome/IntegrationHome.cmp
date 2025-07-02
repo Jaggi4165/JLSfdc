@@ -1,0 +1,32 @@
+<aura:component controller="IntegrationExample" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="value1" type="String" default="" />
+    <aura:attribute name="value2" type="String" default="" />
+    <aura:attribute name="newVal" type="String" default="" />
+    <lightning:card>
+    
+    <lightning:layout horizontalAlign="space">
+        <lightning:layoutItem size="4">
+            <lightning:input aura:id="input1" name="input1" value="{!v.value1}" label="First Name" />
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4">
+            <lightning:input aura:id="input2" name="input2" value="{!v.value2}" label="Last Name" />
+        </lightning:layoutItem>
+        
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="4">
+                <lightning:button variant="success" label="Create" title="Create" onclick="{!c.handleClick }"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+    </lightning:layout>
+    <lightning:layout horizontalAlign="space">
+        <lightning:layoutItem size="4">
+            {!newVal} 
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+        <br/>
+        
+    </lightning:card>
+    
+</aura:component>

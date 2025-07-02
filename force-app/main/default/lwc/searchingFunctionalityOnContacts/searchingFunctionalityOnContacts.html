@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Search Your Contact By Name">
+      <div>
+            <lightning-input type="search" value={searchValue} label="Contact Name" 
+                             placeholder="Enteryour search element" 
+                             onchange={getSearchValue}>
+            </lightning-input>
+       </div>
+       <lightning-button label="Search"  onclick={handleSearchKeyword} variant="brand"></lightning-button>  
+      <div>
+       <table>
+          <thead>
+             <tr >
+                <th><div>First Name</div></th>
+                <th><div>Last Name</div></th>
+                <th><div>Phone</div></th>
+                <th><div >Email</div></th>
+             </tr>
+          </thead>
+          
+          <tbody>   
+             <template for:each={contactsRecord} for:item="con">
+                <tr key={con.Id}>
+                   <td>
+                       <lightning-input lable="First Name" value={con.FirstName} placeholder="--- No data --"></lightning-input>
+                   </td>
+                   <td>
+                       <lightning-input lable="Last Name" value={con.LastName} placeholder="--- No data --"></lightning-input>
+                   </td>
+                   <td>
+                       <lightning-input lable="Phone" value={con.Phone} placeholder="--- No data --"></lightning-input>
+                   </td>
+                   <td>
+                         <lightning-input lable="Email" value={con.Email} placeholder="--- No data --"></lightning-input>
+                   </td>
+                </tr>
+             </template>
+          </tbody>
+       </table>
+      </div>
+</lightning-card>
+ </template>

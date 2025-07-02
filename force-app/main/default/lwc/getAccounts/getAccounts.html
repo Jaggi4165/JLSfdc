@@ -1,0 +1,17 @@
+<template>
+    <lightning-card>
+        <lightning-layout>
+            <lightning-layout-item>
+                <template for:each={accounts.data} for:item="actObj" for:index="indax">
+                    <p key={actObj.Id}>
+                        <a href="#" onclick={handleClick} data-account-id={actObj.Id}>actObj.Name</a>
+                    </p>
+                </template>
+            </lightning-layout-item>
+
+            <lightning-layout-item>
+                <c-get-contacts-by-account-id account-id={accountIdOriginal}></c-get-contacts-by-account-id>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

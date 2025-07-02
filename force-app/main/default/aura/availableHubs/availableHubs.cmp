@@ -1,0 +1,55 @@
+<aura:component implements="force:appHostable" controller="HubController">
+    <aura:registerEvent name="navEvt" type="force:navigateToSObject"/> 
+	<aura:handler name="init" value="{!this}" action="{!c.loadContactList}"/>  
+    <center><h1>MY HUBS</h1></center>
+  	<aura:attribute name="ListOfHubs" type="Hub__c[]"/>
+  	<div class="slds-p-around--large">
+    <table class="slds-table slds-table--bordered" >
+      <thead>
+        <tr>
+          <th scope="col">
+            <p class="slds-truncate" title="Name">Name</p>
+          </th>
+          <th scope="col">
+            <p class="slds-truncate" title="Active__c">Active</p>
+          </th>
+          <th scope="col">
+            <p class="slds-truncate" title="Location__latitude__s">Location</p>
+          </th>
+          <th scope="col">
+            <p class="slds-truncate" title="Rating__c">Rating</p>
+          </th>
+            
+        </tr>
+      </thead>
+        
+      <tbody>
+        <aura:iteration items="{!v.ListOfHubs}" var="hub">
+          <tr>
+             
+            <th scope="row">
+                <a target="_blank" href="{!'/'+hub.Id}" variant="base" label="{!hub.Name}"  data-index="{!hub.Id}" >{!hub.Name}</a>
+       			
+            </th>
+            <th scope="row">
+              <div >{!hub.Active__c}</div>
+            </th>
+            <th scope="row">
+              <div>{!hub.Location__Latitude__s},{!hub.Location__Longitude__s}</div>
+            </th>
+              <th scope="row">
+               <!--Add Child [colorLeadSource.cmp] component and pass the leadSource attribute value-->
+              <c:picklistSourceColor leadSource="{!hub.Rating__c}"/>
+            </th>
+             
+           
+          </tr>
+        </aura:iteration>
+      </tbody>
+    </table>
+  </div>
+    <div>
+        
+    
+    </div>
+</aura:component>

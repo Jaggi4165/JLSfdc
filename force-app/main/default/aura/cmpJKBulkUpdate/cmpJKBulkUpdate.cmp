@@ -1,0 +1,110 @@
+<aura:component controller="cmpJKBulkUpdateCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:availableForFlowScreens" access="global" >
+    <!-- Variable starts here-->
+    <aura:attribute name="objectName" type="String"/>
+    <aura:attribute name="objectAPIName" type="String"/>
+    <aura:attribute name="fieldName" type="String"/>
+    <aura:attribute name="fieldLabel" type="String"/>
+    <aura:attribute name="fieldDatatype" type="String"/>
+    <aura:attribute name="isTextField" type="boolean" default="false"/>
+    <aura:attribute name="isCheckboxField" type="boolean" default="false"/>
+    <aura:attribute name="isPicklistField" type="boolean" default="false"/>
+    <aura:attribute name="inputTextFieldValue" type="String"/>
+    <aura:attribute name="inputCheckboxFieldValue" type="String"/>
+    <aura:attribute name="inputPicklistFieldValue" type="String"/>
+    <aura:attribute name="allFields" type="List" default="[]"/>
+    <aura:attribute name="picklistValues" type="List" default="[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="errorMessage" type="String" default="Please select Required (*) Fields."/>
+    <aura:attribute name="isNotValid" type="boolean" default="flase"/> 
+    <aura:attribute name="toggleValue" type="boolean" default="true"/> 
+    <aura:attribute name="flowStatus" type="boolean" default="false"/>
+    <aura:attribute name="dontHaveAccessOnThisField" type="boolean" default="false"/>
+    
+    
+    <!-- Variables end here -->
+    <!-- Markup starts here-->
+    <aura:if isTrue="{!v.dontHaveAccessOnThisField}">
+        
+    </aura:if>
+    <div class="slds-modal__header">
+        <h2 class="slds-text-heading--medium">
+            Bulk Update
+        </h2>
+    </div>
+    
+    <div class="slds-modal__content slds-p-around--medium">
+        <div>
+            <lightning:layout>
+                <lightning:layoutItem size="12">
+                    <div ><!--class="slds-box slds-box_small"-->
+                        <lightning:select aura:id="selectObject" name="selectObject" label="Select Object" value="{!v.objectName}">
+                            <option text="{!v.objectName}" value="{!v.objectName}" selected="true"></option>
+                        </lightning:select>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <br/>
+            <div class="slds-box slds-box_small slds-m-top_none">
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_2-of-3">
+                        <span><h4 class="slds-text-heading--medium"><b>{!v.objectName}</b></h4></span>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-grid_vertical-align-left">
+                        <span>
+                        	<lightning:input type="toggle" name="toggleButton" aura:id="tglbtn" label="Close tasks" 
+                                         messageToggleActive="Yes" messageToggleInactive="No" checked="{!v.toggleValue}"
+                                         onchange="{!c.getToggleButtonValue}"/>
+                        </span>
+                    </div>
+                </div>
+                
+                <lightning:layout class="slds-p-top_large">
+                    <lightning:layoutItem size="12" class="left-align">
+                        <lightning:select value="{!v.fieldName}" aura:id="selectField"  label="Object Fields" required="true"
+                                          onchange="{!c.onChangeField}">
+                            <option text="Select a field" value=""/>
+                            <aura:iteration items="{!v.allFields}" var="option">
+                                <lightning:icon iconName="standard:record_lookup" alternativeText="Address" title="Address" /> 
+                                <option text="{!option.key}" value="{!option.value}" data:icon="standard:record_lookup"/>
+                                
+                            </aura:iteration>
+                        </lightning:select>
+                        <aura:if isTrue="{!v.isTextField}">
+                            <lightning:input name="input2" label="{!v.fieldName}" value="{!v.inputPicklistFieldValue}"/>
+                        </aura:if>
+                        <aura:if isTrue="{!v.isCheckboxField}">
+                            <lightning:input type="checkbox" label="{!v.fieldName}" name="input1" value="{!v.inputPicklistFieldValue}"/>
+                        </aura:if>
+                        <aura:if isTrue="{!v.isPicklistField}">
+                            <div>
+                                <lightning:select value="{!v.inputPicklistFieldValue}" label="{!v.fieldName}" required="true"
+                                                  onchange="{!c.OnPicklistFieldValueChange}">
+                                    <option text="Select a value" value=""/>
+                                    <aura:iteration items="{!v.picklistValues}" var="option">
+                                        <option text="{!option.key}" value="{!option.value}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                        </aura:if>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slds-modal__footer ">
+        <lightning:layout class="slds-align_absolute-center">
+            
+            <lightning:layoutItem size="6">
+                <aura:if isTrue="{!v.isNotValid}">
+                    <p class="slds-text-color_destructive">{!v.errorMessage}</p>
+                </aura:if>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="6" class="right-align">
+                <button class="slds-button slds-button--brand" onclick="{!c.fireSaveEvent}">Update</button>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+    </div>     
+    <!-- Markup end here -->
+</aura:component>

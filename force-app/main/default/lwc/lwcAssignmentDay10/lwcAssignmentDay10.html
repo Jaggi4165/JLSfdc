@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Recent 10 Account Records" icon-name="standard:record">
+        <template lwc:if={accounts}>
+            <div class="slds-var-m-around_medium">
+                <template for:each={accounts} for:item="account">
+                    <lightning-layout
+                        key={account.Id}
+                        class="slds-var-m-vertical_x-small"
+                    >
+                        <lightning-layout-item flexibility="grow">
+                            {account.Name}
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <lightning-button variant="brand" name={account} label="View" title="view" onclick={viewAccount}></lightning-button>
+                            
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+            </div>
+        </template>
+        <template if:true={showpopup}>
+            <c-reusable-modal record={selectedRecord} onclosepopup={closePopup}></c-reusable-modal>
+        </template>
+    </lightning-card>
+</template>

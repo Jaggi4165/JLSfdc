@@ -1,0 +1,48 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:availableForFlowScreens" access="global" >
+    <aura:attribute name="comments" type="String" default=""/>
+    <aura:attribute name="showError" type="boolean" default="false"/>
+    <aura:attribute name="commentScreenHeader" type="String" default="Design to Close allOpen Tasks"/>
+    <aura:attribute name="errorMessage" type="String" default="Please fill the Required (*) Fields."/>
+    
+    <div class="slds-modal__header">
+        <h2 class="slds-text-heading--medium">
+            {!v.commentScreenHeader}
+        </h2>
+    </div>
+    <div class="slds-modal__content slds-p-around--medium">
+        <div>
+            <div class="slds-box slds-theme_warning slds-theme_alert-texture">
+                <p>
+                    <strong>Please note that this is the invisible action. This action will close all the open Docket activities for all the matter record listed. Click on 'Submit' to execute this action.</strong>
+                </p>
+            </div>
+        </div>
+        <div>
+            <br/>
+            <lightning:layout>
+                <lightning:layoutItem size="12">
+                    <abbr title="required" class="slds-required">*</abbr>Comments
+                    <lightning:textarea name="input1" label="Comments" variant="label-hidden" onchange="{!c.onCommentChange}" value="{!v.comments}" />
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </div>
+    
+    <div class="slds-modal__footer ">
+        
+        
+        <lightning:layout class="slds-align_absolute-center">
+            <lightning:layoutItem size="6" class="left-align">
+                <aura:if isTrue="{!v.showError}">
+                    <p class="slds-text-color_destructive">{!v.errorMessage}</p>
+                </aura:if>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="6" class="right-align">
+                <button class="slds-button slds-button--neutral" onclick="{!c.fireCancelEvent}">Cancel</button>	
+                <button class="slds-button slds-button--brand" onclick="{!c.fireSubmitEvent}">Submit</button>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+    </div>     
+    <!-- Markup end here -->
+</aura:component>

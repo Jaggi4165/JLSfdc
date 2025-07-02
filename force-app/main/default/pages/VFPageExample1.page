@@ -1,0 +1,54 @@
+<apex:page standardController="Account" lightningStylesheets="true" tabStyle="Account" sidebar="true">
+    <apex:form >
+    	<apex:pageBlock >
+    	<apex:pageBlockSection title="Create an Account & Contact">
+            <apex:inputField value="{!Account.name}"/>
+        </apex:pageBlockSection>
+            <apex:pageBlockSection >
+            	<apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Edit" action="{!edit}"/>
+                <apex:commandButton value="Delete" action="{!delete}"/>
+            </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>
+<!--
+<apex:page standardController="Opportunity" recordsetvar="opportunities" id="standopp" lightningStylesheets="true" showHeader="false">
+ <apex:form title="form" id="form" >
+  <apex:pageblock id="firstpb" title="firstpb">
+   <apex:panelgrid columns="4" id="panelg" title="panelg">
+    <apex:outputlabel value="view:"/>
+     <apex:selectlist value="{!filterId}" id="select1" title="select1" size="1">
+     <apex:selectOptions value="{!listviewoptions}"/>
+     <apex:actionsupport event="onchange" rerender="oppsection"/>
+    </apex:selectlist>
+   </apex:panelgrid>
+  <apex:pageblockbuttons >
+   <apex:commandButton value="Save" action="{!save}"/>
+   <apex:commandButton value="Quick Save" action="{!save}"/>
+  </apex:pageblockbuttons> 
+  
+ 
+   <apex:pageblocksection id="oppsection" showheader="true">
+    <apex:repeat value="{!opportunities}" var="opp" id="rep">
+        <apex:pageblocksection id="oppsection2" showheader="true" title="{!opp.name}">
+      <apex:pageblocktable id="table"  value="{!opp.name}" title="pbt1" columns="4" var="pbt">
+       <apex:column headerValue="Information" >
+        <apex:inputField style="width:100px" value="{!opp.stageName}"/><br/>
+        <apex:inputField style="width:100px" value="{!opp.LeadSource}"/> <br/><br/>
+       </apex:column>
+       <apex:column headerValue="Information"  style="width:100px" >
+        <apex:outputtext  styleclass="bold" value="Overview"></apex:outputtext><br/>     
+        <apex:inputField value="{!opp.CreatedById}" /> <br/>
+        <apex:outputtext  styleclass="bold" value="Last Activity"></apex:outputtext><br/> 
+        <apex:inputField value="{!opp.LastModifiedById}" /> <br/>
+          </apex:column>
+      </apex:pageblocktable>
+     </apex:pageblocksection> 
+    </apex:repeat>
+   </apex:pageblocksection>
+   
+  </apex:pageblock>
+ </apex:form> 
+</apex:page>
+-->

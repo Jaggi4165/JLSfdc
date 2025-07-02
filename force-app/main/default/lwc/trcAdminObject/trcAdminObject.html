@@ -1,0 +1,153 @@
+<template>
+    <div class="object-container slds-is-relative">
+        <div class="slds-grid gradient-background slds-grid_vertical-align-center slds-p-top_small slds-p-bottom_xxx-small">
+            <div class="slds-col slds-size_2-of-5 slds-p-horizontal_large">
+                <header class="slds-media slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                            <span class="slds-icon_container slds-icon-text-default">
+                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                    <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#settings"></use>
+                                </svg>
+                            </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-text-title_bold">
+                            <span>Select object fields to track changes</span>
+                        </div>
+                    </div>
+                </header>
+            </div>
+
+            <div class="slds-col slds-grid slds-grid_vertical-align-center slds-size_3-of-5 slds-grid_align-end">
+                <div class="slds-text-align_right slds-p-right_medium">
+                    <lightning-button variant="base" label='Select all' icon-name="utility:check" onclick={onSelectAll}></lightning-button>
+                </div>
+                <div class="slds-text-align_right slds-p-right_medium">
+                    <lightning-button variant="base" label="Deselect all" icon-name="utility:close" onclick={onDeselectAll}></lightning-button>
+                </div>
+                <div class="slds-text-align_right slds-p-right_small">
+                    <lightning-input
+                            type="toggle"
+                            label="Is Active"
+                            message-toggle-active=""
+                            message-toggle-inactive=""
+                            onchange={onActiveToggle}
+                            checked={isActive}
+                    ></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-end">
+            <div class="slds-text-align_left slds-text-title_bold slds-col slds-size_2-of-5 slds-p-left_x-large">
+                Count of selected fields: {isChecked.length}
+            </div>
+
+<!--            <div class="slds-text-align_right slds-col slds-size_1-of-5 slds-p-right_medium">
+                Select group name field:
+            </div>-->
+            <div class="slds-p-right_medium slds-col slds-size_1-of-5">
+                <c-trc-lookup
+                        class="request-lookup"
+                        label="Select group name field"
+                        placeholder="Search group name fields"
+                        scroll-after-n-items="5"
+                        selection={groupField}
+                        onclick={handleGroupLookupClick}
+                        onsearch={handleGroupLookupSearch}
+                        onselectionchange={handleGroupLookupSelect}
+                ></c-trc-lookup>
+            </div>
+
+<!--            <div class="slds-text-align_right slds-col slds-size_1-of-5 slds-p-right_medium">
+                Select boolean filter field:
+            </div>-->
+            <div class="slds-p-right_medium slds-col slds-size_1-of-5">
+                <c-trc-lookup
+                        class="request-lookup"
+                        label="Select boolean filter field"
+                        placeholder="Search boolean fields"
+                        scroll-after-n-items="5"
+                        selection={filterField}
+                        onclick={handleBooleanLookupClick}
+                        onsearch={handleBooleanLookupSearch}
+                        onselectionchange={handleBooleanLookupSelect}
+                ></c-trc-lookup>
+            </div>
+
+            <div class="slds-p-right_medium slds-col slds-size_1-of-5">
+                <c-trc-lookup
+                        class="request-lookup"
+                        label="Select parent controlled field"
+                        placeholder="Select parent controlled field"
+                        scroll-after-n-items="5"
+                        selection={controlledField}
+                        onclick={handleControlledLookupClick}
+                        onsearch={handleControlledLookupSearch}
+                        onselectionchange={handleControlledLookupSelect}
+                ></c-trc-lookup>
+            </div>
+        </div>
+
+        <div class="slds-p-around_x-small slds-grid field-content">
+            <template lwc:if={fieldsOptions.length}>
+                <div class="slds-col slds-size_1-of-3 slds-scrollable_y">
+                    <template for:each={fieldsOptions1} for:item='field'>
+                        <c-trc-admin-field
+                                key={field.apiName}
+                                field-object={field}
+                                onfieldchange={handleFieldChange}
+                        ></c-trc-admin-field>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-scrollable_y">
+                    <template for:each={fieldsOptions2} for:item='field'>
+                        <c-trc-admin-field
+                                key={field.apiName}
+                                field-object={field}
+                                onfieldchange={handleFieldChange}
+                        ></c-trc-admin-field>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-scrollable_y">
+                    <template for:each={fieldsOptions3} for:item='field'>
+                        <c-trc-admin-field
+                                key={field.apiName}
+                                field-object={field}
+                                onfieldchange={handleFieldChange}
+                        ></c-trc-admin-field>
+                    </template>
+                </div>
+            </template>
+            <template lwc:else>
+                <template if:true={isLoading}>
+                    <lightning-spinner
+                            alternative-text="Loading"
+                            variant="brand" size="medium"
+                            class="slds-is-absolute">
+                    </lightning-spinner>
+                </template>
+            </template>
+        </div>
+        <div class="slds-grid gradient-reverse slds-grid_vertical-align-center">
+            <div class="slds-col slds-text-align_right slds-size_1-of-1">
+                <div class="slds-text-color_error slds-col slds-size_1-of-3 slds-p-left_medium slds-grid slds-grid_vertical-align-end grid-trigger_message">
+                    <template lwc:if={isTriggerNotActive}>
+                        <div class="slds-is-relative slds-text-align_right">
+                            <lightning-helptext class="plain-tooltip"
+                                                icon-name="utility:warning"
+                                                content="Please save current configuration to deploy object trigger to the system. If you see this message after saving please connect your system administrator"
+                            ></lightning-helptext>
+                        </div>
+                        <div class="slds-is-relative slds-text-align_right slds-p-left_xxx-small">
+                            No triggers enabled
+                        </div>
+
+                    </template>
+                </div>
+                <lightning-button variant="brand" class="format-button" label='Save' icon-name="utility:save" onclick={saveSettings}></lightning-button>
+                <lightning-button variant="destructive" class="slds-m-left_x-small format-button" label="Delete" icon-name="utility:delete" onclick={deleteSettings}></lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

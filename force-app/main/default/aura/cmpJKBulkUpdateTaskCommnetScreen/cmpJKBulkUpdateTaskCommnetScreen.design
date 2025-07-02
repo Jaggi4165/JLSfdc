@@ -1,0 +1,3 @@
+<design:component>
+	<design:attribute name="comments" label="Comments" />
+</design:component>

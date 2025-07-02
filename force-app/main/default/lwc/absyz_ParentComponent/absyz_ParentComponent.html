@@ -1,0 +1,16 @@
+<template>
+    <div class="slds-around_medium">
+        <lightning-card title="Parent to Child (Task-2,3)">
+            <div class="slds-box">
+                <p> Data from child : {childinput}</p>
+                <br/>
+                <lightning-input value={input} onchange={onInputChange}></lightning-input>
+                <br/>
+                
+            </div>
+            <div class="slds-box">
+                <c-absyz_-child-component parentinput={input} onchangeinchild = {onchangeinchild}></c-absyz_-child-component>
+            </div>
+        </lightning-card>
+    </div>
+</template>

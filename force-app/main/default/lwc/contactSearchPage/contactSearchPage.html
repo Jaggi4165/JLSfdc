@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Finding Contact by using contact name">
+       <lightning-input lable="Enter your contact name : " class="contactname"></lightning-input>
+       <lightning-button onclick={handleSearch}  label="Search"></lightning-button>
+       <div>
+
+        <template if:true={contactList}>
+            Name :<lightning-input lable="Contact FirstName" value={contactList.Name}></lightning-input>
+            Email : <lightning-input value={contactList.Email}></lightning-input>
+            Phone : <lightning-input  value={contactList.Phone}></lightning-input>
+       
+        </template>
+
+    </div>
+
+    </lightning-card>
+</template>

@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Contact Searching Functionality">
+        <div>
+            <lightning-layout>
+                <lightning-layout-item size="8">
+                    <lightning-input type="text" onkeypress={getInput} value={searchKeys}
+                    label="Enter Your Contact Name : "> </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="4">
+                    <lightning-button onclick={getDetailsOfInput} label="Search"></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <!--Get all the related words for the input-->
+        <div if:true={mydata}>
+            <template for:each={mydata} for:item="gri">
+                    <p key={gri.Id} onclick={setAsInput}> <a href="#" key={gri.Id}  value={gri.Name} 
+                        class="myclass">{gri.Name}</a></p>
+            </template>
+        </div>
+
+        <div if:true={mydata2}>
+            <template for:each={mydata2} for:item="gri2">
+                <div key={gri2.Id}>
+                    <lightning-input value={gri2.FirstName} label="First Name"></lightning-input> 
+                <lightning-input value={gri2.LastName} label="Last Name"></lightning-input>
+                <lightning-input value={gri2.Phone} label="Phone"></lightning-input>
+                <lightning-input value={gri2.Email} label="Email"></lightning-input>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

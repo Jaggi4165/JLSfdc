@@ -1,0 +1,38 @@
+<!--template>
+    <div class="slds-border_left slds-border_right">
+        <lightning-card title="QR Code Generator " icon-name="utility:scan">
+            <div>
+                <lightning-input label="Enter something here" data-id="inputField1" onchange={inputChange}> </lightning-input>
+                <lightning-button variant="brand" label="Generate QR Code" title="Generate QR Code" onclick={letterHandler}> </lightning-button>
+            </div>
+             <template if:true={value}>
+                    <img src={img_url} alt="User Image" 
+                        height="100px" 
+                        width="100px"/>
+            </template>
+        </lightning-card>
+    </div>
+</template-->
+<!--template>
+    <div class="slds-border_left slds-border_right">
+        <lightning-card title="QR Code Generator " icon-name="utility:scan">
+            <div>
+                <lightning-input label="Enter something here" data-id="inputField1" onchange={inputChange}> </lightning-input>
+                <lightning-button disabled={isDisabled} variant="brand" label="Generate QR Code" title="Generate QR Code" onclick={letterHandler}> </lightning-button>
+            </div>
+            <div class="qrcode2" id="qrcode2" style="height:200px;width:200px"></div>
+        </lightning-card>
+    </div>
+</template-->
+
+<template>
+    <div class="slds-border_left slds-border_right">
+        <lightning-card title="QR Code Generator " icon-name="utility:scan">
+            <!--div>
+                <lightning-input label="Enter something here" data-id="inputField1" onchange={inputChange}> </lightning-input>
+                <lightning-button disabled={isDisabled} variant="brand" label="Generate QR Code" title="Generate QR Code" onclick={letterHandler}> </lightning-button>
+            </div-->
+            <div class="qrcode2" id="qrcode2" style="height:200px;width:200px"></div>
+        </lightning-card>
+    </div>
+</template>

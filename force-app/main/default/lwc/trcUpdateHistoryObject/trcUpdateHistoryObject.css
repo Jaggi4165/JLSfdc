@@ -1,0 +1,45 @@
+.value-content {
+    min-height: 30vh;
+    height: 40vh !important;
+    overflow-y: visible;
+}
+
+.table-height {
+    height: calc(95% - 3rem) !important;
+}
+
+.value-column {
+    height: 100% !important;
+}
+
+.value-box {
+    height: 90% !important;
+}
+
+.record-form {
+    --slds-c-textarea-sizing-min-height: 100%;
+}
+
+.modal-header {
+    height: 3rem !important;
+}
+
+.result-table {
+    max-height: 31rem;
+    width: 100% !important;
+}
+
+.tableWidth {
+    width: 100% !important;
+}
+
+.table-placeholder {
+    height: 10rem !important;
+}
+
+.paginator {
+    background-color: white;
+    padding: 10px 0 10px 0;
+    height: 2.5rem;
+    border-radius: var(--lwc-borderRadiusMedium);
+}

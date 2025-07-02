@@ -1,0 +1,14 @@
+<aura:component controller="HousieTicketController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="ticketNumbers" type="List" default="[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <table class="slds-table slds-table_bordered">
+        <tbody>
+            <aura:iteration items="{!v.ticketNumbers}" var="number" indexVar="index">
+                <tr>
+                    <td>{!number}</td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+    <lightning:button label="Generate Ticket" onclick="{!c.generateTicket}" />
+</aura:component>

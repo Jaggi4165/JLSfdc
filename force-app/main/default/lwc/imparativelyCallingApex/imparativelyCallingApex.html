@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="ImparativelyCallingApex" icon-name="custom:custom63">
+        <div>
+                <lightning-button label="Load Contacts" onclick={handleLoad}></lightning-button>
+            <template if:true={contacts}>
+                <template for:each={contacts} for:item="contact">
+                    <p key={contact.Id}>{contact.Name}</p>
+                </template>
+            </template>
+            <template if:true={error}>
+                {error}>
+            </template>
+        </div>
+
+    </lightning-card>
+</template>

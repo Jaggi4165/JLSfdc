@@ -1,0 +1,9 @@
+<aura:component >
+	 <aura:registerEvent name="appEvent" type="c:aeEvent"/>
+ 
+    <h1>Welcome to ABSYZ</h1>
+    <p><lightning:button
+        label="Click"
+        onclick="{!c.fireApplicationEvent}" />
+    </p>
+</aura:component>

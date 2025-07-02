@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title="Available Functionalities">
+        <div class="slds-grid slds-wrap slds-p-around_medium">
+
+            <template if:true={showReports}>
+                <div class="tile slds-col slds-size_1-of-3 slds-p-around_small">
+                    <lightning-card title="Reports">
+                        <p class="slds-p-horizontal_small">Access to reporting tools.</p>
+                        <p class="slds-p-horizontal_small"><b>Developed By Jagadeeswar</b></p>
+                    </lightning-card>
+                </div>
+            </template>
+
+            <template if:true={showDashboard}>
+                <div class="tile slds-col slds-size_1-of-3 slds-p-around_small">
+                    <lightning-card title="Dashboard">
+                        <p class="slds-p-horizontal_small">Visual analytics and performance tracking.</p>
+                        <p class="slds-p-horizontal_small"><b>Developed By Jagadeeswar</b></p>
+                    </lightning-card>
+                </div>
+            </template>
+
+            <template if:true={showAdminTools}>
+                <div class="tile slds-col slds-size_1-of-3 slds-p-around_small">
+                    <lightning-card title="Admin Tools">
+                        <p class="slds-p-horizontal_small">Administrative and configuration options.</p>
+                        <p class="slds-p-horizontal_small"><b>Developed By Jagadeeswar</b></p>
+                    </lightning-card>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,37 @@
+<template>
+    <template lwc:if={hasNotEmptyResults}>
+            <template for:each={childIds} for:item='item'>
+                <div key={item.key}>
+                    <template lwc:if={item.records.length}>
+                        <div class="slds-p-top_small slds-p-bottom_medium slds-m-top_medium slds-m-bottom_medium slds-container_fluid childContainer" data-id={item.key}>
+                            <c-trc-update-history-object
+                                    data-id={item.key}
+                                    result={item}
+                            ></c-trc-update-history-object>
+                        </div>
+
+                    </template>
+                    <template lwc:else>
+                        <template lwc:if={isLoading}>
+                            <div class="slds-is-relative slds-container_center slds-slider_vertical">
+                                <lightning-spinner alternative-text="Loading" variant="brand"
+                                                   size="medium" class="slds-p-left_xx-large"></lightning-spinner>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </template>
+    </template>
+
+    <template lwc:else>
+        <template lwc:if={isLoading}>
+            <div class="slds-is-relative slds-container_center slds-slider_vertical">
+                <lightning-spinner alternative-text="Loading" variant="brand"
+                                   size="medium" class="slds-p-left_xx-large"></lightning-spinner>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="slds-container_center">No records found</div>
+        </template>
+    </template>
+</template>

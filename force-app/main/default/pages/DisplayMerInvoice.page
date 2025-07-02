@@ -1,0 +1,9 @@
+<apex:page standardController="Line_Item__c" recordSetVar="merchandise" lightningStylesheets="true">
+    <apex:pageBlock title="Display All Merchandises" >
+         <apex:pageBlockTable value="{!merchandise}" var="mer">
+                <apex:column value="{!mer.Merchandise__c}"/>
+				<apex:column value="{!mer.Invoice__c}"/>
+             
+         </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

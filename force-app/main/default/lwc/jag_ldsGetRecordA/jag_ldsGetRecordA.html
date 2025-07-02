@@ -1,0 +1,26 @@
+<template>
+    <lightning-card  variant="Narrow"  title="LDS getRecord" icon-name="custom:custom13">
+        <div class="slds-p-around_small">
+            <!-- Show Record -->
+            <p>
+                <b>Account Name : </b> {accName}<br/>
+                <b>Industry : </b> {accIndustry}<br/>
+                <b>Rating : </b> {accRating}<br/>
+            </p>
+        </div>
+    </lightning-card>
+
+    <lightning-card  variant="Narrow"  title="LDS getRecords" icon-name="custom:custom13">
+        <div class="slds-p-around_small">
+            <template for:each={accounts} for:item="acc">
+                <lightning-layout key={acc.Id}>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6" large-device-size="3" >
+                        <div class="custom-box">
+                            {acc.Name}
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </div>
+    </lightning-card>
+</template>

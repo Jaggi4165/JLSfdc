@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Create Records">
+        <lightning-tabset variant="vertical">
+            <template for:each={objectMap} for:item="obj">
+                <lightning-tab label={obj.object} key={obj.object}>
+                    <lightning-flow
+                        flow-api-name={obj.flowApiName}
+                        flow-input-variables={obj.inputVariables}
+                        onstatuschange={handleStatusChange}
+                    >
+                    </lightning-flow>
+                </lightning-tab>
+            </template>
+        </lightning-tabset>
+    </lightning-card>
+</template>

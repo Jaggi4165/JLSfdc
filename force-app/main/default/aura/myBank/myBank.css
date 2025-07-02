@@ -1,0 +1,9 @@
+.THIS.card{
+    margin-left:475px;
+    margin-right:475px;
+    border:2px solid cyan;
+    padding:20px;
+}
+.THIS .inner{
+    padding:20px;
+}

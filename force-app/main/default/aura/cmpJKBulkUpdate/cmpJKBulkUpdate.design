@@ -1,0 +1,9 @@
+<design:component>
+	<design:attribute name="recordId" label="record ID" />
+    <design:attribute name="toggleValue" label="Toggle" />
+    <design:attribute name="objectAPIName" label="Object" />
+    <design:attribute name="fieldName" label="Field" />
+    <design:attribute name="inputPicklistFieldValue" label="Value to Update"/>
+    <design:attribute name="flowStatus" label="Flow Completed Successfully?" />
+    
+</design:component>

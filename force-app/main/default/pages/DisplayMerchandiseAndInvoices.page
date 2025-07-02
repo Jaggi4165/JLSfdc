@@ -1,0 +1,25 @@
+<apex:page sidebar="false" controller="ApexClassForMerInvoice">
+<apex:form >
+    <apex:pageBlock id="AccountContactBlock">
+        <apex:pageBlockSection columns="2">
+        <apex:pageBlockTable value="{!lstAccountContactWrapper}" var="acc" id="AccountSection">
+            <apex:column >
+                <apex:inputCheckbox value="{!acc.isSelected}" id="InputId"/>
+            </apex:column>
+            <apex:column value="{!acc.acc.name}"/>
+        </apex:pageBlockTable>
+        <apex:pageBlockTable value="{!lstSelectedAccountContactWrapper}" var="acc" id="contactsSection" rendered="{!IF(lstSelectedAccountContactWrapper.size > 0,true,false)}">>
+            <apex:column headerValue="Account and Its Related Contacts">
+                <apex:pageBlockTable value="{!acc.acc.contacts}" var="con">
+                    <apex:facet name="header">{!acc.acc.Name}</apex:facet>
+                    <apex:column value="{!con.name}" headerValue="Contact Name"/>
+                </apex:pageBlockTable>
+            </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+          <apex:commandButton action="{!ProcessSelected}" value="Show Account and its Contacts" reRender="AccountContactBlock,contactsSection"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

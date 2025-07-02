@@ -1,0 +1,90 @@
+<aura:component controller="CreateContact">
+    <aura:attribute name="contacts" type="Contact[]"/>
+    <aura:attribute name="accounts" type="Account[]"/> 
+<aura:attribute name="newContact" type="Contact"
+        default="{ 'sobjectType': 'Contact',
+                      'FirstName': '',
+                    'LastName': '',
+                    'Email': '',
+                    'Phone': '','MailingStreet':'','MailingCity':'','MailingState':'','Zip':'','MailingCountry':'',
+                    'Password__c': '' }"/>
+    
+    <!-- PAGE HEADER -->
+    <div class="slds-page-header" role="banner">
+      <div class="slds-grid">
+        <div class="slds-col">
+          <p class="slds-text-heading--label">Contact</p>
+          <h1 class="slds-text-heading--medium">My Contact</h1>
+        </div>
+      </div>
+    </div>
+    <!-- / PAGE HEADER -->
+
+    <!-- NEW EXPENSE FORM -->
+    <div class="slds-col slds-col--padded slds-p-top--large">
+ 
+  <div aria-labelledby="newcontactform">
+
+  <!-- BOXED AREA -->
+  <fieldset class="slds-box slds-theme--default slds-container--small">
+
+    <legend id="newexpenseform" class="slds-text-heading--small 
+      slds-p-vertical--medium">
+      Add Contact
+    </legend>
+
+    <!-- CREATE NEW EXPENSE FORM -->
+    <form class="slds-form--stacked">
+        <div class="slds-form-element slds-is-required">
+          <div class="slds-form-element__control">
+              <ui:inputText aura:id="fstname" label="First Name"
+                  class="slds-input"
+                  labelClass="slds-form-element__label"
+                  value="{!v.newContact.FirstName}"
+                  required="true"/>
+          </div></div>
+      <div class="slds-form-element slds-is-required">
+          <div class="slds-form-element__control">
+              <ui:inputText aura:id="lstname" label="Last Name"
+                  class="slds-input"
+                  labelClass="slds-form-element__label"
+                  value="{!v.newContact.LastName}"
+                  required="true"/>
+          </div>
+     </div>
+    
+         <div class="slds-form-element slds-is-required">
+          <div class="slds-form-element__control">
+              <ui:inputText aura:id="email" label="Email"
+                  class="slds-input"
+                  labelClass="slds-form-element__label"
+                  value="{!v.newContact.Email}"
+                  required="true"/>
+          </div>
+     </div>
+    <div class="slds-form-element slds-is-required">
+          <div class="slds-form-element__control">
+              <ui:inputText aura:id="phone" label="Phone"
+                  class="slds-input"
+                  labelClass="slds-form-element__label"
+                  value="{!v.newContact.Phone}"
+                  required=""/>
+          </div></div>
+          
+      <div class="slds-form-element">
+          <ui:button label="Submit"
+              class="slds-button slds-button--brand"
+              press="{!c.clickCreateContact}"/>
+      </div>
+    </form>
+    <!-- / CREATE NEW EXPENSE FORM -->
+
+  </fieldset>
+  <!-- / BOXED AREA -->
+
+</div>
+<!-- / CREATE NEW EXPENSE -->
+
+    </div>
+    <!-- / NEW EXPENSE FORM -->
+</aura:component>

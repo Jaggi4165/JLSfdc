@@ -1,0 +1,14 @@
+<template>
+<lightning-card title="OutStandingDues">
+    
+    <template if:true={records}>
+        <p>Total Pending Fare : <lightning-formatted-number value={records} format-style="currency" currency-code="USD"></lightning-formatted-number></p>
+        
+    </template>
+                
+        
+        
+
+    
+</lightning-card>  
+</template>

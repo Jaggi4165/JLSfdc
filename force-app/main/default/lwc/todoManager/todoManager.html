@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="To Do Manager">
+        <div class="slds-p-around_small">
+            <template lwc:if={todaList.data}>
+                 <template for:each={todoList.data} for:item="each_todo">
+                    <!-- <lightning-card key={each_todo.Id}> -->
+                       <a key={each_todo.Id}> Name : {each_todo.Name}</a>
+                    <!-- </lightning-card> -->
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

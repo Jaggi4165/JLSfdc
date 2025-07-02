@@ -1,0 +1,12 @@
+<template>
+    <div if:true={totalRecs} class="slds-grid slds-grid_align-end ">
+        <div class="slds-col vertical-align-center">
+            <p class="slds-text-color_weak">Displaying {counterBegin} - {counterEnd} of {totalRecs}</p>
+        </div>
+
+        <div class="slds-col">
+            <!-- Placeholder for jquery.blade-pagination -->
+            <ul lwc:dom="manual" class="blade-pagination" data-current={pageNumber} data-total={pagesAmount}></ul>
+        </div>
+    </div>
+</template>
