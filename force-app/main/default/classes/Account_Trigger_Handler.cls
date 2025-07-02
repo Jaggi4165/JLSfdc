@@ -7,7 +7,7 @@ public class Account_Trigger_Handler {
     // This method will execute when the Account Record is going to insert
     public static void onBeforeInsertOperation(Map<Id,Account> triggered_Account_newMap){
         for(Account Record_Account : triggered_Account_newMap.values()){
-            Record_Account.Description = Record_Account.Name + ' Description Updated';
+            Record_Account.Description = Record_Account.Name + ' Description Updated from trigger.';
         }
     }
     
